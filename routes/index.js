@@ -1,20 +1,40 @@
 var httpAdapter = require('http');
+var https = require('https');
 var geocoderProvider = 'google';
 var request = require('request');
 var bodyParser = require('body-parser');
 var express = require('express');
 var router = express.Router();
 var url = require('url');
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var liftie = require('liftie');
+var Flickr = require("flickrapi");
+var movement = geolocationstream();
 
-var geocoderProvider = 'google';
-var httpAdapter = 'http';
-var extra = {
-    apiKey: 'AIzaSyDddBryCv9mOYSHFbaPiryQIxAGYop1je8',
-    formatter: null
+
+flickrOptions = {
+    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
+    secret: "41a710fd1e55ba6b"
 };
-var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+
+Flickr.authenticate(flickrOptions, function(error, flickr) {
+
+});
+
+//var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+
+var geolocation = require('geolocation');
+
+// var geocoderProvider = 'google';
+// var extra = {
+//     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
+//     formatter: null
+// };
+// var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+
+// geocoder.geocode('29 champs elysée paris', function(err, res) {
+//     console.log(res);
+// });
 
 request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -40,13 +60,25 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+
 router.get('/locationSearch',function(req,res){
 
     geocoder.geocode('29 champs elysée paris', function(err, res){
         console.log(res);
+
+    });
+});
+
+
+router.get('/locate',function(req,res){
+
+  navigator.geolocation.getCurrentPosition(function (err, position) {
+        if (err) throw err
+        console.log(position)
+
     });
 
-}
+});
 
 router.get('/mountain',function(req,res){
     var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
@@ -66,16 +98,16 @@ router.get('/mountain',function(req,res){
 
 });
 
-router.get('/test',function(req,res){
-    geocoder.geocode('29 champs elysée paris')
-        .then(function(res) {
-            console.log(res);
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
+// router.get('/test',function(req,res){
+//     geocoder.geocode('29 champs elysée paris')
+//         .then(function(res) {
+//             console.log(res);
+//         })
+//         .catch(function(err) {
+//             console.log(err);
+//         });
 
-});
+// });
 
 router.get('/processSearch',function(req,res){
 
@@ -153,6 +185,7 @@ router.get('/checkUsers',function(req,res){
     });
 
 });
+
 
 //connection.end();
 
