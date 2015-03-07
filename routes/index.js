@@ -8,7 +8,8 @@ var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
 var liftie = require('liftie');
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var geolocation = require('geolocation');
 
@@ -126,7 +127,10 @@ router.get('/loginForm',function(req,res){
 
 router.post('/processLogin',function(req,res){
 
-    passport.use(new LocalStrategy(
+    passport.use(new LocalStrategy({
+        usernameInput = 'username',//req.body.username,
+        passwordInput = 'password'//req.body.password
+    },
       function(username, password, done) {
         User.findOne({ username: username }, function (err, user) {
           if (err) { return done(err); }
@@ -141,8 +145,7 @@ router.post('/processLogin',function(req,res){
       }
     ));
 
-    usernameInput = req.body.username;
-    passwordInput = req.body.password;
+    
 
     var checkUser = 'SELECT username, password from users where username = '+usernameInput+' and password = '+passwordInput;
     connection.query(checkUser, function(err,rows,fields){

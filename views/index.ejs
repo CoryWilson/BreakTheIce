@@ -12,6 +12,13 @@
       </div>
 
       <% include partials/forms/signUpForm.ejs %>
+
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">Try It</button>
+
+      <p id="demo"></p>
+      
     </div>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>
