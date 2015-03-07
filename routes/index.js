@@ -8,6 +8,7 @@ var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
 var liftie = require('liftie');
+<<<<<<< HEAD
 var Flickr = require("flickrapi");
 var movement = geolocationstream();
 
@@ -22,26 +23,11 @@ Flickr.authenticate(flickrOptions, function(error, flickr) {
 });
 
 //var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+=======
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+>>>>>>> origin/master
 
 var geolocation = require('geolocation');
-
-// var geocoderProvider = 'google';
-// var extra = {
-//     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
-//     formatter: null
-// };
-// var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
-
-// geocoder.geocode('29 champs elysée paris', function(err, res) {
-//     console.log(res);
-// });
-
-request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log(body); // Show the HTML for the Google homepage.
-    }
-
-});
 
 var connection = mysql.createConnection({
     user     : 'root',
@@ -60,6 +46,7 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+<<<<<<< HEAD
 
 router.get('/locationSearch',function(req,res){
 
@@ -76,6 +63,53 @@ router.get('/locate',function(req,res){
         if (err) throw err
         console.log(position)
 
+=======
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+
+    res.render('index',{title: 'Home | Mountain Reports',
+        classname: 'home',
+        page: 'home'})
+
+});
+
+
+// var geocoderProvider = 'google';
+// var extra = {
+//     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
+//     formatter: null
+// };
+// var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
+
+// geocoder.geocode('29 champs elysée paris', function(err, res) {
+//     console.log(res);
+// });
+
+router.get('/powderlines',function(req,res){
+    request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body); // Show the HTML for the Google homepage.
+        }
+
+    });
+});
+
+router.get('/locate',function(req,res){
+
+  navigator.geolocation.getCurrentPosition(function (err, position) {
+        if (err) throw err;
+        console.log(position);
+>>>>>>> origin/master
     });
 
 });
@@ -116,14 +150,7 @@ router.get('/processSearch',function(req,res){
 
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
 
-    res.render('index',{title: 'Home | Mountain Reports',
-        classname: 'home',
-        page: 'home'})
-
-});
 
 router.get('/loginForm',function(req,res){
 
@@ -134,6 +161,21 @@ router.get('/loginForm',function(req,res){
 });
 
 router.post('/processLogin',function(req,res){
+
+    passport.use(new LocalStrategy(
+      function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username.' });
+          }
+          if (!user.validPassword(password)) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+        });
+      }
+    ));
 
     usernameInput = req.body.username;
     passwordInput = req.body.password;
