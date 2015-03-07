@@ -7,13 +7,10 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var router = express.Router();
 var url = require('url');
-
+var mysql      = require('mysql');
 var liftie = require('liftie');
 var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter);
 
-
-var request = require('request');
-var mysql      = require('mysql');
 
 
 request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {

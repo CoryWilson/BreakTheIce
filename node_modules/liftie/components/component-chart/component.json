@@ -1,0 +1,16 @@
+{
+  "name": "chart",
+  "repo": "component/chart",
+  "version": "0.1.1",
+  "description": "Simple HTML5 Charts using the canvas element",
+  "keywords": [
+    "charts",
+    "chart",
+    "charting"
+  ],
+  "author": "nnnick",
+  "main": "Chart.js",
+  "scripts": [
+    "Chart.js"
+  ]
+}
