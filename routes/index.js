@@ -7,9 +7,14 @@ var router = express.Router();
 var url = require('url');
 var mysql      = require('mysql');
 var liftie = require('liftie');
-var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter);
 
-
+var geocoderProvider = 'google';
+var httpAdapter = 'http';
+var extra = {
+    apiKey: 'AIzaSyDddBryCv9mOYSHFbaPiryQIxAGYop1je8',
+    formatter: null
+};
+var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
 
 request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -34,6 +39,14 @@ connection.connect(function(err) {
 
     console.log('connected as id ' + connection.threadId);
 });
+
+router.get('/locationSearch',function(req,res)){
+
+    geocoder.geocode('29 champs elysée paris', function(err, res) {
+        console.log(res);
+    });
+
+}
 
 router.get('/mountain',function(req,res){
     var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
