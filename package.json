@@ -17,8 +17,7 @@
     "mysql": "^2.5.5",
     "node-geocoder": "^2.16.1",
     "passport": "^0.2.1",
-    "request": "^2.53.0",
-    "serve-favicon": "~2.2.0"
+    "request": "^2.53.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
