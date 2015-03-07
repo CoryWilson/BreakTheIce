@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c191df2-c843-4732-b531-ffe6719de603" name="Default" comment="" />
+    <list default="true" id="9c191df2-c843-4732-b531-ffe6719de603" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/forms/signUpForm.ejs" afterPath="$PROJECT_DIR$/views/partials/forms/signUpForm.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ASL_Node_Project.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,10 +26,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="3" selection-start="303" selection-end="303" vertical-scroll-proportion="0.26946107" vertical-offset="0" max-vertical-offset="690">
+            <state line="113" column="0" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2295">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="1" selection-start="564" selection-end="564" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="495">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signUpForm.ejs" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/partials/forms/signUpForm.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="23" selection-start="100" selection-end="100" vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="660">
               <folding />
             </state>
           </provider>
@@ -35,7 +56,7 @@
       <file leaf-file-name="index.ejs" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="8" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="585">
+            <state line="5" column="8" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="375">
               <folding />
             </state>
           </provider>
@@ -46,8 +67,8 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="5" column="0" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
               <folding>
-                <marker date="1425657866000" expanded="true" signature="57:231" placeholder="..." />
-                <marker date="1425657866000" expanded="true" signature="113:223" placeholder="..." />
+                <marker date="1425754423000" expanded="true" signature="57:231" placeholder="..." />
+                <marker date="1425754423000" expanded="true" signature="113:223" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -71,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/partials/page/head.ejs" />
         <option value="$PROJECT_DIR$/node.js" />
         <option value="$PROJECT_DIR$/rouxmeet/app.js" />
         <option value="$PROJECT_DIR$/views/default.ejs" />
@@ -85,14 +105,15 @@
         <option value="$PROJECT_DIR$/views/searchResults.ejs" />
         <option value="$PROJECT_DIR$/views/header.ejs" />
         <option value="$PROJECT_DIR$/views/signUpForm.ejs" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/partials/forms/signUpForm.ejs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="30" />
-    <option name="y" value="35" />
+    <option name="y" value="164" />
     <option name="width" value="1400" />
     <option name="height" value="816" />
   </component>
@@ -107,7 +128,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -122,7 +143,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -151,12 +171,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ASL_Node_Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreakTheIce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ASL_Node_Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreakTheIce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ASL_Node_Project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BreakTheIce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -171,14 +246,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -187,6 +254,14 @@
       <option name="saveOutputToFile" value="false" />
       <option name="showConsoleOnStdErr" value="false" />
       <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
@@ -212,7 +287,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="30" y="35" width="1400" height="816" extended-state="1" />
+    <frame x="30" y="164" width="1400" height="816" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -248,9 +323,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24981844" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -265,13 +340,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="36" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="690">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="8" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="585">
@@ -283,8 +351,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
           <folding>
-            <marker date="1425657866000" expanded="true" signature="57:231" placeholder="..." />
-            <marker date="1425657866000" expanded="true" signature="113:223" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="57:231" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="113:223" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -307,8 +375,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
           <folding>
-            <marker date="1425657866000" expanded="true" signature="57:231" placeholder="..." />
-            <marker date="1425657866000" expanded="true" signature="113:223" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="57:231" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="113:223" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -330,11 +398,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.25990492" vertical-offset="164" max-vertical-offset="795" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="3" selection-start="429" selection-end="429" vertical-scroll-proportion="0.46583852" vertical-offset="0" max-vertical-offset="644" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/searchResults.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="8" selection-start="104" selection-end="104" vertical-scroll-proportion="0.11645963" vertical-offset="0" max-vertical-offset="644" />
@@ -349,15 +412,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
           <folding>
-            <marker date="1425657866000" expanded="true" signature="57:231" placeholder="..." />
-            <marker date="1425657866000" expanded="true" signature="113:223" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="57:231" placeholder="..." />
+            <marker date="1425754423000" expanded="true" signature="113:223" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="8" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="585">
+        <state line="5" column="8" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="375">
           <folding />
         </state>
       </provider>
@@ -369,7 +432,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="3" selection-start="303" selection-end="303" vertical-scroll-proportion="0.26946107" vertical-offset="0" max-vertical-offset="690">
+        <state line="113" column="0" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="1" selection-start="564" selection-end="564" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/forms/signUpForm.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="23" selection-start="100" selection-end="100" vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
