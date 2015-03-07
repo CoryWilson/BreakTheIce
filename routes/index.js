@@ -40,7 +40,7 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
-router.get('/locationSearch',function(req,res)){
+router.get('/locationSearch',function(req,res){
 
     geocoder.geocode('29 champs elysée paris', function(err, res) {
         console.log(res);
