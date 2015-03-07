@@ -78,22 +78,7 @@ MongoClient.connect(url, function(err, db) {
   db.close();
 });*/
 
-var connection = mysql.createConnection({
-  user     : 'root',
-  password : 'root',
-  host     : 'localhost',
-  port: '8889',
-  database : 'asl_node'
-});
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('connected as id ' + connection.threadId);
-});
 
 
 

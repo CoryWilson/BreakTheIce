@@ -3,6 +3,22 @@ var express = require('express');
 var router = express.Router();
 var url = require('url');
 
+var connection = mysql.createConnection({
+  user     : 'root',
+  password : 'root',
+  host     : 'localhost',
+  port: '8889',
+  database : 'asl_node'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
 
 router.get('/', function(req, res, next) {
 
