@@ -1,0 +1,19 @@
+/***** Project Variables *****/
+
+/***** Typography Variables *****/
+$heading-font : 'brandon-grotesque',sans-serif;
+$main-font    : 'rooney-web',serif;
+
+/***** Color Variables *****/
+$color1: #242038;
+$color2: #b7d3f2;
+$color3: #8d86c9;
+$color4: #afafdc;
+$color5: #fffbff;
+
+
+@import
+"base",
+"layout",
+"typography",
+"color";

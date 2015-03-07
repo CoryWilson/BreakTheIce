@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/default/head.ejs %>
+</head>
+  <body class="<%=page %>">
+    <% include partials/default/header.ejs %>
+    <div>
+      <div class="jumbotron small-12 small-centered columns">
+        <!-- <h1><%= title %></h1> -->
+        <% include search.ejs %>
+      </div>
+
+      <% include partials/forms/signUp.ejs %>
+
+      <% include partials/default/footer.ejs %>
+      <% include partials/default/jsdefaults.ejs %>
+    </div>
+  </body>
+</html>

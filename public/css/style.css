@@ -1,0 +1,62 @@
+/*
+
+$dark_blue: #242038;
+$light_blue: #b7d3f2;
+$medium_purple: #8d86c9;
+$light_purple: #afafdc;
+$white: #fffbff;
+
+*/
+
+body{
+    background-color: #fffbff;
+    font-family: 'helvetica neue',helvetica,verdana,sans-serif;
+}
+
+
+h1{
+    text-align: center;
+}
+header {
+	margin-bottom: 0px;
+}
+footer {
+	text-align: center;
+}
+button {
+	border: 2px solid #242038;
+	border-radius: 5px;
+	background: none;
+	color: #000;
+}
+button:hover, button:active, button:visited {
+	background: #242038;
+	color: #fff;
+}
+input.roundify {
+	border-radius: 5px;
+}
+.icon-bar {
+	background: #242038;
+}
+.icon-bar a:hover {
+	background: #afafdc;
+}
+
+.search {
+	margin: 75px 0;
+}
+
+.jumbotron {
+	border-bottom: 2px solid #242038;
+	margin-top: 0;
+	overflow: hidden;
+}
+
+.registerForm {
+	margin: 30px;
+	overflow: hidden;
+}
+.registerForm form {
+	overflow: hidden;
+}
