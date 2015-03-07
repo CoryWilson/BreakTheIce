@@ -1,5 +1,3 @@
-
-
 var httpAdapter = require('http');
 var geocoderProvider = 'google';
 var request = require('request');
