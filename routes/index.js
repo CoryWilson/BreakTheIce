@@ -29,6 +29,16 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
