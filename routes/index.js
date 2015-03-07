@@ -8,9 +8,9 @@ var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
 var liftie = require('liftie');
-<<<<<<< HEAD
+
 var Flickr = require("flickrapi");
-var movement = geolocationstream();
+//var movement = geolocationstream();
 
 
 flickrOptions = {
@@ -23,11 +23,11 @@ Flickr.authenticate(flickrOptions, function(error, flickr) {
 });
 
 //var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-=======
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
->>>>>>> origin/master
 
-var geolocation = require('geolocation');
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+
+
+//var geolocation = require('geolocation');
 
 var connection = mysql.createConnection({
     user     : 'root',
@@ -46,24 +46,27 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
-<<<<<<< HEAD
-
-router.get('/locationSearch',function(req,res){
-
-    geocoder.geocode('29 champs elysée paris', function(err, res){
-        console.log(res);
-
-    });
-});
 
 
-router.get('/locate',function(req,res){
+//router.get('/locationSearch',function(req,res){
+//
+//    geocoder.geocode('29 champs elysée paris', function(err, res){
+//        console.log(res);
+//
+//    });
+//});
 
-  navigator.geolocation.getCurrentPosition(function (err, position) {
-        if (err) throw err
-        console.log(position)
 
-=======
+//router.get('/locate',function(req,res){
+//
+//  navigator.geolocation.getCurrentPosition(function (err, position) {
+//        if (err) throw err
+//        console.log(position)
+//
+//      })
+//});
+
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -109,7 +112,7 @@ router.get('/locate',function(req,res){
   navigator.geolocation.getCurrentPosition(function (err, position) {
         if (err) throw err;
         console.log(position);
->>>>>>> origin/master
+
     });
 
 });
