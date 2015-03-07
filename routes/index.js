@@ -46,7 +46,7 @@ router.get('/locationSearch',function(req,res){
         console.log(res);
     });
 
-}
+});
 
 router.get('/mountain',function(req,res){
     var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
