@@ -3,6 +3,8 @@
 <head>
   <% include partials/default/head.ejs %>
 </head>
+
+
   <body class="<%=page %>">
     <% include partials/default/header.ejs %>
     <div>
@@ -13,17 +15,30 @@
 
       <% include partials/forms/signUpForm.ejs %>
 
-      <p>Click the button to get your coordinates.</p>
+        <button onclick="getLocation()">Search Your Location</button>
 
-      <button onclick="getLocation()">Try It</button>
-
-      <p id="demo"></p>
-
-
-
-
+        <p id="demo"></p>
 
     </div>
+
+    <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+
+
+
+        }
+    </script>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>
   </body>
