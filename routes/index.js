@@ -10,6 +10,7 @@ var mysql = require('mysql');
 var liftie = require('liftie');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 var geolocation = require('geolocation');
 
@@ -62,9 +63,15 @@ router.get('/', function(req, res, next) {
 // });
 
 router.get('/powderlines',function(req,res){
-    request('http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15', function (error, response, body) {
+    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=3&count=3';
+    request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body); // Show the HTML for the Google homepage.
+            var results = JSON.parse(body);
+                res.render('searchResults',
+                {   title: 'Nearest Mountains',
+                    page: 'Results',
+                    results: results
+                });
         }
 
     });
@@ -75,6 +82,7 @@ router.get('/locate',function(req,res){
   navigator.geolocation.getCurrentPosition(function (err, position) {
         if (err) throw err;
         console.log(position);
+
     });
 
 });
@@ -84,11 +92,12 @@ router.get('/mountain',function(req,res){
     request(plAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var parsedJSON = JSON.parse(body);
-            res.render('mountain',{title: 'Mountain Info',
+            res.render('mountain',
+            {   
+                title: 'Mountain Info',
                 classname: 'mountain',
                 page: 'mountain',
                 name: parsedJSON.station_information.name
-
             });
         }
 
@@ -115,8 +124,8 @@ router.get('/processSearch',function(req,res){
 
 
 
-
-
+//SQL Queries
+//Login Form
 router.get('/loginForm',function(req,res){
 
     res.render('login',{title: 'Mountain Info',
@@ -124,40 +133,62 @@ router.get('/loginForm',function(req,res){
         page: 'login'});
 
 });
+//FB Login Credentials
+// router.get('/fbLogin', function(req,res){
 
-router.post('/processLogin',function(req,res){
+//     passport.use(new FacebookStrategy({
+//         clientID: '623540344445376',
+//         clientSecret: '673938d760b16c8d4c0d2f828d18b173',
+//         callbackURL: "/"
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//         User.findOrCreate(..., function(err, user) {
+//             if (err) { return done(err); }
+//             done(null, user);
+//         });
+//     }
+//     ));
 
-    passport.use(new LocalStrategy({
-        usernameInput = 'username',//req.body.username,
-        passwordInput = 'password'//req.body.password
-    },
-      function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
-        });
-      }
-    ));
+// });
+
+//Process Login Info
+//Check credentials
+// router.post('/processLogin',function(req,res){
+
+//     passport.use(new LocalStrategy({
+//             usernameInput = 'username',//req.body.username,
+//             passwordInput = 'password'//req.body.password
+//         }
+//         function(username, password, done) {
+//             User.findOne({ username: username }, function (err, user) {
+//               if (err) { return done(err); }
+//               if (!user) {
+//                 return done(null, false, { message: 'Incorrect username.' });
+//               }
+//               if (!user.validPassword(password)) {
+//                 return done(null, false, { message: 'Incorrect password.' });
+//               }
+//               return done(null, user);
+//             });
+//         }
+//     ));
+
+//     pas
 
     
 
-    var checkUser = 'SELECT username, password from users where username = '+usernameInput+' and password = '+passwordInput;
-    connection.query(checkUser, function(err,rows,fields){
-        res.render('user',{title: 'User Page',
-            classname: 'user',
-            page: 'user',
-            username: req.body.username,
-            password: req.body.password
-        });
-    });
-});
+//     var checkUser = 'SELECT username, password from users where username = '+usernameInput+' and password = '+passwordInput;
+//     connection.query(checkUser, function(err,rows,fields){
+//         res.render('user',{title: 'User Page',
+//             classname: 'user',
+//             page: 'user',
+//             username: req.body.username,
+//             password: req.body.password
+//         });
+//     });
+// });
 
+//Insert new user into the database
 router.post('/addUser',function(req,res){
 
     emailInput = req.body.email;
@@ -176,6 +207,7 @@ router.post('/addUser',function(req,res){
 
 });
 
+//pull down all users
 router.get('/checkUsers',function(req,res){
     var check = 'SELECT * FROM users';
     connection.query(check, function(err,rows,fields){
