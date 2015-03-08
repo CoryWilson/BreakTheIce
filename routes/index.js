@@ -61,6 +61,23 @@ router.get('/', function(req, res, next) {
 // geocoder.geocode('29 champs elysée paris', function(err, res) {
 //     console.log(res);
 // });
+router.post('/url',function(req,res){
+    var googleApi = 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM';
+    var geo = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyA9RhkovjIJCLh0mo6EaXIuWzx8LhF0Hlk';
+    
+    request(geo, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var results = JSON.parse(body);
+                res.render('searchResults',
+                {   title: 'Nearest Mountains',
+                    page: 'Results',
+                    results: results
+                });
+            console.log(results);
+        }
+
+    });
+});
 
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
@@ -118,9 +135,17 @@ router.get('/mountain',function(req,res){
 
 // });
 
-router.get('/processSearch',function(req,res){
+router.get('/search',function(req,res){
 
-    console.log('work mother fucker');
+    var obj = {}
+    var jsonBody = JSON.stringify(req.body);
+    console.log('body: '+jsonBody);
+    res.render('coordinates',
+    {
+        title: 'Coordinates',
+        page: 'coordinates',
+        coordinates: jsonBody
+    });
 });
 
 
