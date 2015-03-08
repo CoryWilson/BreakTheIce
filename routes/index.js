@@ -101,8 +101,9 @@ router.get('/', function(req, res, next) {
 //     console.log(res);
 //});
 
-router.get('/powderlines',function(req,res){
-    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=3&count=3';
+//swap out lat and long from geolocation to get complete functionality
+router.get('/searchResults',function(req,res){
+    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);

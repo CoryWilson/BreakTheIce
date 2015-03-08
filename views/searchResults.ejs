@@ -1,11 +1,22 @@
-<div class="large-3 columns">
-    <h1>Your Results: </h1>
-</div>
-
-<div class="large-9 columns">
-    <ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/default/head.ejs %>
+</head>
+  <body class="<%=page %>">
+    <% include partials/default/header.ejs %>
+    <div class="large-9 large-centered columns">
+    	<h1>Your Results: </h1>
 		<% for(var i = 0; i<results.length; i++){ %>
-        <li><%=results[i].station_information.name %></li>
+        	<a href="/mountain/:id">
+	        	<div class="searchResults row large-11 large-centered columns">
+	        		<h4><%=results[i].station_information.name %></h4>
+	        		<p><%=results[i].station_information.elevation %> ft</p>
+	        	</div>
+        	</a>
 		<% } %>
-    </ul>
-</div>
+	</div>
+      <% include partials/default/footer.ejs %>
+      <% include partials/default/jsdefaults.ejs %>
+  </body>
+</html>

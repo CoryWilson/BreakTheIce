@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html hola_ext_inject="disabled"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Home | Mountain Reports</title>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.1/css/foundation.min.css"/>
+ -->
+<link rel="stylesheet" href="http://localhost:3000/css/normalize.css">
+<link rel="stylesheet" href="http://localhost:3000/css/foundation.min.css">
+<link rel="stylesheet" href="http://localhost:3000/css/style.css">
+
+
+<style type="text/css"></style><meta class="foundation-data-attribute-namespace"><meta class="foundation-mq-xxlarge"><meta class="foundation-mq-xlarge-only"><meta class="foundation-mq-xlarge"><meta class="foundation-mq-large-only"><meta class="foundation-mq-large"><meta class="foundation-mq-medium-only"><meta class="foundation-mq-medium"><meta class="foundation-mq-small-only"><meta class="foundation-mq-small"><style></style></head>
+  <body class="home">
+    <header>
+	<div class="icon-bar five-up">
+		<a href="./Home   Mountain Reports_files/Home   Mountain Reports.html" class="item">
+			<label>Home</label>
+		</a>
+		<a href="http://localhost:3000/loginForm" class="right">
+			<label>Login</label>
+		</a>
+	</div>
+</header>
+    <div>
+      <div class="jumbotron small-12 small-centered columns">
+        <!-- <h1>Home | Mountain Reports</h1> -->
+        <div class="large-8 large-centered columns">
+          <div class="left">
+            <h1>Break The Ice</h1>
+            <p>Find quick mountain reports</p>
+          </div>
+          <div class="right">
+            <form action="http://localhost:3000/searchResults" type="post" class="search">
+	<div class="small-11 small-centered large-7 columns">
+        <button aria-label="submit form" href="#" type="submit" class="small-10 small-centred columns">
+        	Find Nearby Mountains
+        </button>
+	</div>
+</form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="registerForm small-11 small-centered medium-10 large-8 columns">
+  <form action="http://localhost:3000/addUser" method="post">
+    <h1>Sign Up and Get Started</h1>
+    <div class="small-10 columns centered">
+      <div class="row">
+        <div class="small-3 columns">
+          <label for="email" class="right">Email</label>
+        </div>
+        <div class="small-9 columns">
+          <input type="email" id="email" class="roundify" placeholder="Email" name="email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-3 columns">
+          <label for="username" class="right">Username</label>
+        </div>
+        <div class="small-9 columns">
+          <input type="text" id="username" class="roundify" placeholder="Username" name="username">
+        </div>
+      </div>
+      <div class="row">  
+        <div class="small-3 columns">
+          <label for="password" class="right">Password</label>
+        </div>
+        <div class="small-9 columns">
+          <input type="password" id="password" class="roundify" placeholder="Password" name="password">
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-9 small-offset-3 columns">
+          <button aria-label="submit form" href="#" type="submit" class="small-10 small-offset-1 columns">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">Try It</button>
+
+      <p id="demo"></p>
+      
+    </div>
+      <footer>
+	<p>© Halton &amp; Wilson Enterprises 2015</p>
+</footer>
+      <!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.1/js/foundation.min.js"></script> -->
+<script src="./Home   Mountain Reports_files/jquery-1.11.2.min.js"></script>
+<script src="./Home   Mountain Reports_files/foundation.min.js"></script>
+<script src="./Home   Mountain Reports_files/geolocate.js"></script>
+  
+
+<script id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i; } else { d.textContent=i; } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }}catch(e){}</script></body></html>

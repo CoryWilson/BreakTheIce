@@ -7,10 +7,18 @@
 
   <body class="<%=page %>">
     <% include partials/default/header.ejs %>
-    <div>
+    <div class="wrapper">
       <div class="jumbotron small-12 small-centered columns">
         <!-- <h1><%= title %></h1> -->
-        <% include search.ejs %>
+        <div class="content large-8 large-centered columns">
+          <div class="left">
+            <h1>Break The Ice</h1>
+            <p>Mountain Reports. Quick.</p>
+          </div>
+          <div class="right">
+            <% include search.ejs %>
+          </div>
+        </div>
       </div>
 
       <% include partials/forms/signUpForm.ejs %>
@@ -19,6 +27,7 @@
 
         <p id="demo"></p>
 
+<<<<<<< HEAD
     </div>
 
     <script>
@@ -39,7 +48,11 @@
 
         }
     </script>
+=======
+      <p id="demo"></p>
+>>>>>>> 718aa7d04d9552c4732fbc1a1a18609d132c6c0c
       <% include partials/default/footer.ejs %>
-      <% include partials/default/jsdefaults.ejs %>
+    </div>
+    <% include partials/default/jsdefaults.ejs %>
   </body>
 </html>

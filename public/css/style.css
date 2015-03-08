@@ -10,12 +10,20 @@ $white: #fffbff;
 
 body{
     background-color: #fffbff;
-    font-family: 'helvetica neue',helvetica,verdana,sans-serif;
+    font-family: 'brandon-grotesque',helvetica,sans-serif;
 }
-
-
+button, a ,h4 {
+	font-family: 'brandon-grotesque',helvetica,sans-serif;
+}
+.wrapper {
+	z-index:1;
+}
 h1{
+	font-family: 'brandon-grotesque',helvetica,sans-serif;
     text-align: center;
+}
+p {
+	font-family: 'rooney-web',georgia,serif;
 }
 header {
 	margin-bottom: 0px;
@@ -37,20 +45,48 @@ input.roundify {
 	border-radius: 5px;
 }
 .icon-bar {
+	z-index: 2;
 	background: #242038;
 }
 .icon-bar a:hover {
 	background: #afafdc;
 }
 
-.search {
-	margin: 75px 0;
+.jumbotron {
+	background: url('../images/skilift.jpg') center no-repeat;
+	border-bottom: 2px solid #242038;
+	margin-top: -10px;
+	overflow: hidden;
+}
+.jumbotron h1 {
+	font-family: 'eskapade-fraktur','brandon-grotesque',sans-serif;
+	font-size: 4em;
 }
 
-.jumbotron {
-	border-bottom: 2px solid #242038;
-	margin-top: 0;
+.jumbotron .content {
 	overflow: hidden;
+	margin: 200px auto;
+}
+
+.jumbotron .content .left {
+	overflow: hidden;
+	background: rgba(255, 250, 255, 0.8);
+	padding: 30px;
+	border-radius: 5px;
+}
+
+.jumbotron .content .right {
+	overflow: hidden;
+}
+
+.jumbotron button {
+	background: #fffbff;
+	padding: 30px;
+	margin: 50px auto;
+}
+
+.jumbotron button:hover {
+	background: #242038;
 }
 
 .registerForm {
@@ -59,4 +95,11 @@ input.roundify {
 }
 .registerForm form {
 	overflow: hidden;
+}
+.searchResults {
+	border: 2px solid #242038;
+	border-radius: 5px;
+	background: none;
+	color: #000;
+	margin: 15px 0;
 }
