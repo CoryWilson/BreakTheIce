@@ -12,8 +12,9 @@ body{
     background-color: #fffbff;
     font-family: 'helvetica neue',helvetica,verdana,sans-serif;
 }
-
-
+.wrapper {
+	z-index:1;
+}
 h1{
     text-align: center;
 }
@@ -37,7 +38,7 @@ input.roundify {
 	border-radius: 5px;
 }
 .icon-bar {
-	z-index: 30;
+	z-index: 2;
 	background: #242038;
 }
 .icon-bar a:hover {
@@ -46,7 +47,6 @@ input.roundify {
 
 .jumbotron {
 	background: url('../images/skilift.jpg') center no-repeat;
-	/*height: 525px;*/
 	border-bottom: 2px solid #242038;
 	margin-top: -10px;
 	overflow: hidden;
@@ -54,23 +54,24 @@ input.roundify {
 
 .jumbotron .content {
 	overflow: hidden;
-	margin: 225px auto;
+	margin: 200px auto;
 }
 
 .jumbotron .content .left {
 	overflow: hidden;
-	background: rgba(255, 250, 255, 0.5);
+	background: rgba(255, 250, 255, 0.8);
 	padding: 30px;
 	border-radius: 5px;
 }
 
 .jumbotron .content .right {
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .jumbotron button {
 	background: #fffbff;
 	padding: 30px;
+	margin: 50px auto;
 }
 
 .jumbotron button:hover {
