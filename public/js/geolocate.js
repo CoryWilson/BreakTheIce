@@ -20,7 +20,7 @@ $(function(){
 			data.long = position.coords.longitude;
 		
 			$.ajax({
-				type: 'POST',
+				type: 'post',
 				data: JSON.stringify(data),
 		        contentType: 'application/json',
                 url: 'http://localhost:3000/coordinates',						

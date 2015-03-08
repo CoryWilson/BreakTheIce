@@ -120,8 +120,43 @@ router.post('/url',function(req,res){
 //});
 
 //swap out lat and long from geolocation to get complete functionality
+// router.get('/searchResults',function(req,res){
+//     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
+//     request(powderLinesAPI, function (error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var results = JSON.parse(body);
+//                 res.render('searchResults',
+//                 {   title: 'Nearest Mountains',
+//                     page: 'Results',
+//                     results: results
+//                 });
+//         }
+
+//     });
+// });
+
+router.post('/coordinates',function(req,res){
+
+    var obj = req.body; 
+    var lat = obj.lat;
+    var long = obj.long;
+
+    //var obj = {}
+    // res.render('coordinates',
+    // {
+    //     title: 'Coordinates',
+    //     page: 'coordinates',
+    //     coordinates: req.body
+    // });
+    console.log(lat+', '+long);
+});
+
 router.get('/searchResults',function(req,res){
-    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
+    // var obj = req.body; 
+    // var lat = obj.lat;
+    // var long = obj.long;
+
+    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
@@ -166,18 +201,6 @@ router.get('/mountain',function(req,res){
 //         });
 
 // });
-
-router.post('/coordinates',function(req,res){
-
-    var obj = {}
-    res.render('coordinates',
-    {
-        title: 'Coordinates',
-        page: 'coordinates',
-        coordinates: req.body
-    });
-    console.log(req.body);
-});
 
 
 
