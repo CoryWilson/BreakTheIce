@@ -37,20 +37,44 @@ input.roundify {
 	border-radius: 5px;
 }
 .icon-bar {
+	z-index: 30;
 	background: #242038;
 }
 .icon-bar a:hover {
 	background: #afafdc;
 }
 
-.search {
-	margin: 75px 0;
+.jumbotron {
+	background: url('../images/skilift.jpg') center no-repeat;
+	/*height: 525px;*/
+	border-bottom: 2px solid #242038;
+	margin-top: -10px;
+	overflow: hidden;
 }
 
-.jumbotron {
-	border-bottom: 2px solid #242038;
-	margin-top: 0;
+.jumbotron .content {
 	overflow: hidden;
+	margin: 225px auto;
+}
+
+.jumbotron .content .left {
+	overflow: hidden;
+	background: rgba(255, 250, 255, 0.5);
+	padding: 30px;
+	border-radius: 5px;
+}
+
+.jumbotron .content .right {
+	overflow:hidden;
+}
+
+.jumbotron button {
+	background: #fffbff;
+	padding: 30px;
+}
+
+.jumbotron button:hover {
+	background: #242038;
 }
 
 .registerForm {
@@ -60,7 +84,7 @@ input.roundify {
 .registerForm form {
 	overflow: hidden;
 }
-.searchResult {
+.searchResults {
 	border: 2px solid #242038;
 	border-radius: 5px;
 	background: none;

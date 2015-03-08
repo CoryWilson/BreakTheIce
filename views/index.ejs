@@ -5,22 +5,28 @@
 </head>
   <body class="<%=page %>">
     <% include partials/default/header.ejs %>
-    <div>
-      <div class="jumbotron small-12 small-centered columns">
-        <!-- <h1><%= title %></h1> -->
-        <% include search.ejs %>
+    <div class="jumbotron small-12 small-centered columns">
+      <!-- <h1><%= title %></h1> -->
+      <div class="content large-8 large-centered columns">
+        <div class="left">
+          <h1>Break The Ice</h1>
+          <p>Mountain Reports. Quick.</p>
+        </div>
+        <div class="right">
+          <% include search.ejs %>
+        </div>
       </div>
-
-      <% include partials/forms/signUpForm.ejs %>
-
-      <p>Click the button to get your coordinates.</p>
-
-      <button onclick="getLocation()">Try It</button>
-
-      <p id="demo"></p>
-      
     </div>
-      <% include partials/default/footer.ejs %>
-      <% include partials/default/jsdefaults.ejs %>
+
+    <% include partials/forms/signUpForm.ejs %>
+
+    <p>Click the button to get your coordinates.</p>
+
+    <button onclick="getLocation()">Try It</button>
+
+    <p id="demo"></p>
+    
+    <% include partials/default/footer.ejs %>
+    <% include partials/default/jsdefaults.ejs %>
   </body>
 </html>
