@@ -8,26 +8,28 @@ var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
 var liftie = require('liftie');
-
+var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
-//var movement = geolocationstream();
 
 
-flickrOptions = {
-    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
-    secret: "41a710fd1e55ba6b"
-};
-
-Flickr.authenticate(flickrOptions, function(error, flickr) {
-
-});
+//flickrOptions = {
+//    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
+//    secret: "41a710fd1e55ba6b"
+//};
+//
+//Flickr.authenticate(flickrOptions, function(error, flickr) {
+//
+//});
 
 //var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
+
+
 var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
-//var geolocation = require('geolocation');
 
 var connection = mysql.createConnection({
     user     : 'root',
@@ -47,7 +49,6 @@ connection.connect(function(err) {
 });
 
 
-
 //router.get('/locationSearch',function(req,res){
 //
 //    geocoder.geocode('29 champs elysée paris', function(err, res){
@@ -65,6 +66,7 @@ connection.connect(function(err) {
 //
 //      })
 //});
+
 
 
 passport.serializeUser(function(user, done) {
@@ -107,15 +109,7 @@ router.get('/powderlines',function(req,res){
     });
 });
 
-router.get('/locate',function(req,res){
 
-  navigator.geolocation.getCurrentPosition(function (err, position) {
-        if (err) throw err;
-        console.log(position);
-
-    });
-
-});
 
 router.get('/mountain',function(req,res){
     var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
@@ -153,8 +147,6 @@ router.get('/processSearch',function(req,res){
 
 
 
-
-
 router.get('/loginForm',function(req,res){
 
     res.render('login',{title: 'Mountain Info',
@@ -162,74 +154,78 @@ router.get('/loginForm',function(req,res){
         page: 'login'});
 
 });
+//
+//router.post('/processLogin',function(req,res){
+//
+//    passport.use(new LocalStrategy({
+//
+//
+//        usernameInput = 'username',//req.body.username,
+//        passwordInput = 'password'//req.body.password
+//    }
+//      function(username, password, done) {
+//        User.findOne({ username: username }, function (err, user) {
+//          if (err) { return done(err); }
+//          if (!user) {
+//            return done(null, false, { message: 'Incorrect username.' });
+//          }
+//          if (!user.validPassword(password)) {
+//            return done(null, false, { message: 'Incorrect password.' });
+//          }
+//          return done(null, user);
+//        });
+//      });
 
-router.post('/processLogin',function(req,res){
 
-    passport.use(new LocalStrategy(
-      function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
-        });
-      }
-    ));
-
-    usernameInput = req.body.username;
-    passwordInput = req.body.password;
-
-    var checkUser = 'SELECT username, password from users where username = '+usernameInput+' and password = '+passwordInput;
-    connection.query(checkUser, function(err,rows,fields){
-        res.render('user',{title: 'User Page',
-            classname: 'user',
-            page: 'user',
-            username: req.body.username,
-            password: req.body.password
-        });
-    });
-});
-
-router.post('/addUser',function(req,res){
-
-    emailInput = req.body.email;
-    usernameInput = req.body.username;
-    passwordInput = req.body.password;
-
-    var post = {email:emailInput,username:usernameInput,password:passwordInput};
-
-    var query = connection.query('INSERT INTO users SET?',post,function(err,result){
-
-    });
-
-    console.log(query.sql);
-
-    res.redirect('/');
-
-});
-
-router.get('/checkUsers',function(req,res){
-    var check = 'SELECT * FROM users';
-    connection.query(check, function(err,rows,fields){
-        if(err) throw err;
-
-        for(var i in rows){
-            res.render('user',{title: 'User Page',
-                classname: 'user',
-                page: 'user',
-                username: rows[i].username,
-                password: rows[i].password
-            });
-            console.log(rows[i].username);
-            console.log(rows[i].password);
-        }
-    });
-
-});
+//
+//
+//    var checkUser = 'SELECT username, password from users where username = '+usernameInput+' and password = '+passwordInput;
+//    connection.query(checkUser, function(err,rows,fields){
+//        res.render('user',{title: 'User Page',
+//            classname: 'user',
+//            page: 'user',
+//            username: req.body.username,
+//            password: req.body.password
+//        });
+//    });
+//
+//
+//router.post('/addUser',function(req,res){
+//
+//    emailInput = req.body.email;
+//    usernameInput = req.body.username;
+//    passwordInput = req.body.password;
+//
+//    var post = {email:emailInput,username:usernameInput,password:passwordInput};
+//
+//    var query = connection.query('INSERT INTO users SET?',post,function(err,result){
+//
+//    });
+//
+//    console.log(query.sql);
+//
+//    res.redirect('/');
+//
+//});
+//
+//router.get('/checkUsers',function(req,res){
+//    var check = 'SELECT * FROM users';
+//    connection.query(check, function(err,rows,fields){
+//        if(err) throw err;
+//
+//        for(var i in rows){
+//            res.render('user',{title: 'User Page',
+//                classname: 'user',
+//                page: 'user',
+//                username: rows[i].username,
+//                password: rows[i].password
+//            });
+//            console.log(rows[i].username);
+//            console.log(rows[i].password);
+//        }
+//    });
+//
+//});
 
 
 //connection.end();
