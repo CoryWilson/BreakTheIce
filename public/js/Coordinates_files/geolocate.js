@@ -15,20 +15,19 @@ $(function(){
 		function success(position){
 			
 			//demo.html(lat+', '+long);
+			
 			var data = {};
 			data.lat = position.coords.latitude;
-			data.long = position.coords.longitude;
-		
+			data.long = position.coords.longitude;	
 			$.ajax({
-				type: 'POST',
+				url: 'coordinates',
+				type: 'post',
+				dataType: 'json',
 				data: JSON.stringify(data),
-		        contentType: 'application/json',
-                url: 'http://localhost:3000/coordinates',						
-                success: function(data) {
-                    console.log('success');
-                    //console.log(JSON.stringify(data));
-                }
-			});
+				success:function(data){
+					console.log(JSON.stringify(data));
+				}
+			});	
 		}
 
 		function fail(msg){

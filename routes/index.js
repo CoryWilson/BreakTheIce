@@ -99,7 +99,6 @@ router.get('/', function(req, res, next) {
 //
 //geocoder.geocode('29 champs elysée paris', function(err, res) {
 //     console.log(res);
-<<<<<<< HEAD
 // });
 router.post('/url',function(req,res){
     var googleApi = 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM';
@@ -118,9 +117,7 @@ router.post('/url',function(req,res){
 
     });
 });
-=======
 //});
->>>>>>> d934c05bac1d5d2fd8b8f8cca8c643e2393f4eb7
 
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
@@ -170,17 +167,16 @@ router.get('/mountain',function(req,res){
 
 // });
 
-router.get('/search',function(req,res){
+router.post('/coordinates',function(req,res){
 
     var obj = {}
-    var jsonBody = JSON.stringify(req.body);
-    console.log('body: '+jsonBody);
     res.render('coordinates',
     {
         title: 'Coordinates',
         page: 'coordinates',
-        coordinates: jsonBody
+        coordinates: req.body
     });
+    console.log(req.body);
 });
 
 

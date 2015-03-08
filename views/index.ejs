@@ -23,39 +23,12 @@
 
       <% include partials/forms/signUpForm.ejs %>
 
-<<<<<<< HEAD
       <p>Click the button to get your coordinates.</p>
       <button class="coordinates">Try It</button>
-=======
-        <button onclick="getLocation()">Search Your Location</button>
+      <p id="demo"></p>
 
-        <p id="demo"></p>
-
-<<<<<<< HEAD
     </div>
 
-    <script>
-        var x = document.getElementById("demo");
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-        function showPosition(position) {
-
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-                    "<br>Longitude: " + position.coords.longitude;
-
-
-
-        }
-    </script>
-=======
->>>>>>> d934c05bac1d5d2fd8b8f8cca8c643e2393f4eb7
-      <p id="demo"></p>
->>>>>>> 718aa7d04d9552c4732fbc1a1a18609d132c6c0c
       <% include partials/default/footer.ejs %>
     </div>
     <% include partials/default/jsdefaults.ejs %>
