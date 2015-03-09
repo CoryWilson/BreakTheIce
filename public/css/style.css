@@ -7,6 +7,9 @@ $light_purple: #afafdc;
 $white: #fffbff;
 
 */
+h2{
+    text-align: center;
+}
 
 body{
     background-color: #fffbff;
