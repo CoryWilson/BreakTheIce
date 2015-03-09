@@ -10,6 +10,10 @@ var mysql = require('mysql');
 var liftie = require('liftie');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 
 //flickrOptions = {
@@ -21,15 +25,7 @@ var Flickr = require("flickrapi");
 //
 //});
 
-//var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
-
-
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
 
 
 var connection = mysql.createConnection({
@@ -40,14 +36,6 @@ var connection = mysql.createConnection({
     database : 'asl_node'
 });
 
-connection.connect(function(err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-
-    console.log('connected as id ' + connection.threadId);
-});
 
 
 router.get('/locationSearch',function(req,res){
@@ -68,18 +56,6 @@ router.get('/locate',function(req,res){
       })
 });
 
-
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -90,6 +66,7 @@ router.get('/', function(req, res, next) {
 });
 
 
+<<<<<<< HEAD
 //var geocoderProvider = 'google';
 //var extra = {
 //     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
@@ -151,6 +128,9 @@ router.post('/coordinates',function(req,res){
     console.log(lat+', '+long);
 });
 
+=======
+
+>>>>>>> e899047ed1a23114cdc37e052ba606d19dd2cd0c
 router.get('/searchResults',function(req,res){
     // var obj = req.body; 
     // var lat = obj.lat;
@@ -169,7 +149,6 @@ router.get('/searchResults',function(req,res){
 
     });
 });
-
 
 
 router.get('/mountain',function(req,res){
@@ -191,6 +170,7 @@ router.get('/mountain',function(req,res){
 
 });
 
+<<<<<<< HEAD
 // router.get('/test',function(req,res){
 //     geocoder.geocode('29 champs elysée paris')
 //         .then(function(res) {
@@ -206,6 +186,8 @@ router.get('/mountain',function(req,res){
 
 //SQL Queries
 //Login Form
+=======
+>>>>>>> e899047ed1a23114cdc37e052ba606d19dd2cd0c
 
 router.get('/loginForm',function(req,res){
 
@@ -216,25 +198,6 @@ router.get('/loginForm',function(req,res){
 });
 
 
-//router.post('/processLogin',function(req,res){
-//
-//    passport.use(new LocalStrategy({
-//
-//        usernameInput = 'username',//req.body.username,
-//        passwordInput = 'password'//req.body.password
-//    }),
-//      function(username, password, done) {
-//        User.findOne({ username: username }, function (err, user) {
-//          if (err) { return done(err); }
-//          if (!user) {
-//            return done(null, false, { message: 'Incorrect username.' });
-//          }
-//          if (!user.validPassword(password)) {
-//            return done(null, false, { message: 'Incorrect password.' });
-//          }
-//          return done(null, user);
-//        });
-//      })
 
 router.post('/addUser',function(req,res){
 
@@ -254,24 +217,55 @@ router.post('/addUser',function(req,res){
 
 });
 
-router.get('/checkUsers',function(req,res){
-    var check = 'SELECT * FROM users';
-    connection.query(check, function(err,rows,fields){
-        if(err) throw err;
 
-        for(var i in rows){
-            res.render('user',{title: 'User Page',
-                classname: 'user',
-                page: 'user',
-                username: rows[i].username,
-                password: rows[i].password
-            });
-            console.log(rows[i].username);
-            console.log(rows[i].password);
-        }
+
+
+router.post('/checkUsers',function(req,res){
+
+    var user = req.body.username;
+    var pass = req.body.password;
+
+
+    var check = 'SELECT username from users where username = ? and password = ?';
+    connection.query(check,[user,pass], function(err,rows,fields){
+        if(err) throw err;
+              console.log(rows);
+
+
+    });
+});
+
+
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!user.verifyPassword(password)) { return done(null, false); }
+            return done(null, user);
+        });
+    }
+));
+
+router.post('/loginForm',
+    passport.authenticate('local', { failureRedirect: '/loginForm' }),
+    function(req, res) {
+        res.redirect('/');
     });
 
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
+
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
 
 //FB Login Credentials
 // router.get('/fbLogin', function(req,res){
@@ -291,38 +285,6 @@ router.get('/checkUsers',function(req,res){
 
 // });
 
-//Process Login Info
-//Check credentials
-// router.post('/processLogin',function(req,res){
-
-//     passport.use(new LocalStrategy({
-//             usernameInput = 'username',//req.body.username,
-//             passwordInput = 'password'//req.body.password
-//         }
-//         function(username, password, done) {
-//             User.findOne({ username: username }, function (err, user) {
-//               if (err) { return done(err); }
-//               if (!user) {
-//                 return done(null, false, { message: 'Incorrect username.' });
-//               }
-//               if (!user.validPassword(password)) {
-//                 return done(null, false, { message: 'Incorrect password.' });
-//               }
-//               return done(null, user);
-//             });
-//         }
-//     ));
-
-//     pas
-
-    
-
-
-
-
-
-
-connection.end();
 
 module.exports = router;
 
