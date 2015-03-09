@@ -20,9 +20,12 @@
           </div>
         </div>
       </div>
-
-      <% include partials/forms/signUpForm.ejs %>
-
+      
+      <% if(data){ %>
+        
+      <% } else { %>
+        <% include partials/forms/signUpForm.ejs %>
+      <% }; %>
       <p>Click the button to get your coordinates.</p>
       <button class="coordinates">Try It</button>
       <p id="demo"></p>
