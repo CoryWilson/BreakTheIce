@@ -27,35 +27,8 @@
       <button class="coordinates">Try It</button>
       <p id="demo"></p>
 
-<<<<<<< HEAD
     </div>
 
-=======
-
-    </div>
-
-    <script>
-        var x = document.getElementById("demo");
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-        function showPosition(position) {
-
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-                    "<br>Longitude: " + position.coords.longitude;
-
-
-
-        }
-    </script>
-
-      <p id="demo"></p>
-
->>>>>>> e899047ed1a23114cdc37e052ba606d19dd2cd0c
       <% include partials/default/footer.ejs %>
 
     <% include partials/default/jsdefaults.ejs %>

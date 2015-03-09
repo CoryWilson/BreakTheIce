@@ -1,20 +1,20 @@
+var express = require('express');
+var session = require('express-session');
+
 var httpAdapter = require('http');
 var https = require('https');
-var geocoderProvider = 'google';
+
 var request = require('request');
 var bodyParser = require('body-parser');
-var express = require('express');
 var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
-var liftie = require('liftie');
+//var liftie = require('liftie');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
-var session = require('express-session');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy;
+// var FacebookStrategy = require('passport-facebook').Strategy;
 
 //flickrOptions = {
 //    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
@@ -25,8 +25,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //
 //});
 
-
-
+//global session variable
+var sess;
 
 var connection = mysql.createConnection({
     user     : 'root',
@@ -36,37 +36,142 @@ var connection = mysql.createConnection({
     database : 'asl_node'
 });
 
+router.get('/',function(req,res){
+    res.render('index',{
+        title: 'Home',
+        page: 'home',
+        header: 'header',
+        data: sess
+    })
+});
+
+//SQL Queries
+
+//Login Form 
+router.get('/loginForm',function(req,res){
+
+    res.render('login',{title: 'User Login',
+        classname: 'search',
+        page: 'login',
+        header: 'header',
+        data: sess
+    });
+
+});
+
+//Add New User
+router.post('/addUser',function(req,res){
+
+    emailInput = req.body.email;
+    usernameInput = req.body.username;
+    passwordInput = req.body.password;
+
+    var post = {email:emailInput,username:usernameInput,password:passwordInput};
+    var statement = 'insert into users set?';
+    var query = connection.query(statement,post,function(err,result){
+
+    });
+
+    console.log(query.sql);
+
+    res.redirect('/');
+
+});
 
 
-router.get('/locationSearch',function(req,res){
+//Checking User
+router.post('/checkUser',function(req,res){
+ 
+    sess = req.session;
 
-    geocoder.geocode('29 champs elysée paris', function(err, res){
-        console.log(res);
+    var user = req.body.username;
+    var pass = req.body.password;
 
+
+    var statement = 'select * from users where username = ? and password = ?';
+    var query = connection.query(statement,[user,pass], function(err,rows,fields){
+        if(err) throw err;
+              console.log(rows);
+              console.log('Id: '+rows[0].id);
+              console.log('username: '+rows[0].username);
+              
+              sess.id = rows[0].id;
+              sess.email = rows[0].email;
+              sess.username = rows[0].username;
+              //sess.password = rows[0].password;
+
+              console.log('Session Id: '+sess.id);
+              console.log('Session Email: '+sess.email);
+              console.log('Session Username: '+sess.username);
+              //console.log('Session Password: '+sess.password);
+              res.render('user',
+                {   
+                    title: 'User Profile',
+                    classname: 'user',
+                    page: 'user',
+                    header: 'header',
+                    data: sess
+                });
     });
 });
 
-
-router.get('/locate',function(req,res){
-
-  navigator.geolocation.getCurrentPosition(function (err, position) {
-        if (err) throw err
-        console.log(position)
-
-      })
+//check user profile session
+router.get('/profile',function(req,res){
+    if(sess){
+      res.render('user',
+            {   
+                title: 'User Profile',
+                classname: 'user',
+                page: 'user',
+                header: 'header',
+                data: sess
+            });
+    } else {
+        res.redirect('/');
+    }
+  
 });
+
+//end session & log user out
+router.get('/logout',function(req,res){
+
+    sess = null;
+    res.redirect('/');
+
+});
+
+
+// router.get('/locationSearch',function(req,res){
+
+//     geocoder.geocode('29 champs elysée paris', function(err, res){
+//         console.log(res);
+
+//     });
+// });
+
+
+// router.get('/locate',function(req,res){
+
+//   navigator.geolocation.getCurrentPosition(function (err, position) {
+//         if (err) throw err
+//         console.log(position)
+
+//       })
+// });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
     res.render('index',{title: 'Home | Mountain Reports',
         classname: 'home',
-        page: 'home'})
+        header: 'header',
+        page: 'home',
+        data: sess
+        });
 
 });
 
 
-<<<<<<< HEAD
 //var geocoderProvider = 'google';
 //var extra = {
 //     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
@@ -77,23 +182,23 @@ router.get('/', function(req, res, next) {
 //geocoder.geocode('29 champs elysée paris', function(err, res) {
 //     console.log(res);
 // });
-router.post('/url',function(req,res){
-    var googleApi = 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM';
-    var geo = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyA9RhkovjIJCLh0mo6EaXIuWzx8LhF0Hlk';
+// router.post('/url',function(req,res){
+//     var googleApi = 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM';
+//     var geo = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyA9RhkovjIJCLh0mo6EaXIuWzx8LhF0Hlk';
     
-    request(geo, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var results = JSON.parse(body);
-                res.render('searchResults',
-                {   title: 'Nearest Mountains',
-                    page: 'Results',
-                    results: results
-                });
-            console.log(results);
-        }
+//     request(geo, function (error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var results = JSON.parse(body);
+//                 res.render('searchResults',
+//                 {   title: 'Nearest Mountains',
+//                     page: 'Results',
+//                     results: results
+//                 });
+//             console.log(results);
+//         }
 
-    });
-});
+//     });
+// });
 //});
 
 //swap out lat and long from geolocation to get complete functionality
@@ -112,11 +217,13 @@ router.post('/url',function(req,res){
 //     });
 // });
 
+//works grabs coordinates from browser through ajax call
 router.post('/coordinates',function(req,res){
 
     var obj = req.body; 
     var lat = obj.lat;
     var long = obj.long;
+    console.log(lat+', '+long);
 
     //var obj = {}
     // res.render('coordinates',
@@ -125,30 +232,26 @@ router.post('/coordinates',function(req,res){
     //     page: 'coordinates',
     //     coordinates: req.body
     // });
-    console.log(lat+', '+long);
 });
 
-=======
+// router.get('/searchResults',function(req,res){
+//     // var obj = req.body; 
+//     // var lat = obj.lat;
+//     // var long = obj.long;
 
->>>>>>> e899047ed1a23114cdc37e052ba606d19dd2cd0c
-router.get('/searchResults',function(req,res){
-    // var obj = req.body; 
-    // var lat = obj.lat;
-    // var long = obj.long;
+//     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+//     request(powderLinesAPI, function (error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var results = JSON.parse(body);
+//                 res.render('searchResults',
+//                 {   title: 'Nearest Mountains',
+//                     page: 'Results',
+//                     results: results
+//                 });
+//         }
 
-    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-    request(powderLinesAPI, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var results = JSON.parse(body);
-                res.render('searchResults',
-                {   title: 'Nearest Mountains',
-                    page: 'Results',
-                    results: results
-                });
-        }
-
-    });
-});
+//     });
+// });
 
 
 router.get('/mountain',function(req,res){
@@ -170,7 +273,6 @@ router.get('/mountain',function(req,res){
 
 });
 
-<<<<<<< HEAD
 // router.get('/test',function(req,res){
 //     geocoder.geocode('29 champs elysée paris')
 //         .then(function(res) {
@@ -181,110 +283,6 @@ router.get('/mountain',function(req,res){
 //         });
 
 // });
-
-
-
-//SQL Queries
-//Login Form
-=======
->>>>>>> e899047ed1a23114cdc37e052ba606d19dd2cd0c
-
-router.get('/loginForm',function(req,res){
-
-    res.render('login',{title: 'Mountain Info',
-        classname: 'search',
-        page: 'login'});
-
-});
-
-
-
-router.post('/addUser',function(req,res){
-
-    emailInput = req.body.email;
-    usernameInput = req.body.username;
-    passwordInput = req.body.password;
-
-    var post = {email:emailInput,username:usernameInput,password:passwordInput};
-
-    var query = connection.query('INSERT INTO users SET?',post,function(err,result){
-
-    });
-
-    console.log(query.sql);
-
-    res.redirect('/');
-
-});
-
-
-
-
-router.post('/checkUsers',function(req,res){
-
-    var user = req.body.username;
-    var pass = req.body.password;
-
-
-    var check = 'SELECT username from users where username = ? and password = ?';
-    connection.query(check,[user,pass], function(err,rows,fields){
-        if(err) throw err;
-              console.log(rows);
-
-
-    });
-});
-
-
-
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) { return done(null, false); }
-            if (!user.verifyPassword(password)) { return done(null, false); }
-            return done(null, user);
-        });
-    }
-));
-
-router.post('/loginForm',
-    passport.authenticate('local', { failureRedirect: '/loginForm' }),
-    function(req, res) {
-        res.redirect('/');
-    });
-
-
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
-
-
-
-//FB Login Credentials
-// router.get('/fbLogin', function(req,res){
-
-//     passport.use(new FacebookStrategy({
-//         clientID: '623540344445376',
-//         clientSecret: '673938d760b16c8d4c0d2f828d18b173',
-//         callbackURL: "/"
-//     },
-//     function(accessToken, refreshToken, profile, done) {
-//         User.findOrCreate(..., function(err, user) {
-//             if (err) { return done(err); }
-//             done(null, user);
-//         });
-//     }
-//     ));
-
-// });
-
 
 module.exports = router;
 
