@@ -3,8 +3,8 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mysql      = require('mysql');
-
+var mysql = require('mysql');
+var session = require('session');
 var routes = require('./routes/index');
 
 var app = express();
@@ -18,23 +18,11 @@ app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(session({secret: 'jimmy buffet'}));
-// app.use(passport.initialize());
-// app.use(passport.session());
-//app.use(app.router);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-app.configure(function() {
-    app.use(express.static('public'));
-    app.use(express.cookieParser());
-    app.use(express.bodyParser());
-    app.use(express.session({ secret: 'keyboard cat' }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(router.router);
-});
 
 
 // catch 404 and forward to error handler

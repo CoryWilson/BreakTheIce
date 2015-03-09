@@ -3,9 +3,11 @@ var https = require('https');
 var geocoderProvider = 'google';
 var request = require('request');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var express = require('express');
 var router = express.Router();
 var url = require('url');
+var sessions = require('session');
 var mysql = require('mysql');
 var liftie = require('liftie');
 var geolocation = require('geolocation');
@@ -13,8 +15,6 @@ var Flickr = require("flickrapi");
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-
 
 //flickrOptions = {
 //    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
@@ -25,9 +25,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //
 //});
 
-
-
-
 var connection = mysql.createConnection({
     user     : 'root',
     password : 'root',
@@ -35,8 +32,6 @@ var connection = mysql.createConnection({
     port: '8889',
     database : 'asl_node'
 });
-
-
 
 router.get('/locationSearch',function(req,res){
 
@@ -46,6 +41,12 @@ router.get('/locationSearch',function(req,res){
     });
 });
 
+
+router.get('/logout',function(req,res){
+
+    req.session.destroy();
+
+});
 
 router.get('/locate',function(req,res){
 
@@ -65,9 +66,8 @@ router.get('/', function(req, res, next) {
 
 });
 
-
-
 router.get('/searchResults',function(req,res){
+
     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
@@ -131,9 +131,6 @@ router.post('/addUser',function(req,res){
 
 });
 
-
-
-
 router.post('/checkUsers',function(req,res){
 
     var user = req.body.username;
@@ -148,8 +145,6 @@ router.post('/checkUsers',function(req,res){
 
     });
 });
-
-
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -168,7 +163,6 @@ router.post('/loginForm',
         res.redirect('/');
     });
 
-
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
@@ -178,26 +172,6 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
-
-
-
-//FB Login Credentials
-// router.get('/fbLogin', function(req,res){
-
-//     passport.use(new FacebookStrategy({
-//         clientID: '623540344445376',
-//         clientSecret: '673938d760b16c8d4c0d2f828d18b173',
-//         callbackURL: "/"
-//     },
-//     function(accessToken, refreshToken, profile, done) {
-//         User.findOrCreate(..., function(err, user) {
-//             if (err) { return done(err); }
-//             done(null, user);
-//         });
-//     }
-//     ));
-
-// });
 
 
 module.exports = router;
