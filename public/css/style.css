@@ -7,13 +7,16 @@ $light_purple: #afafdc;
 $white: #fffbff;
 
 */
-h2{
-    text-align: center;
-}
 
 body{
     background-color: #fffbff;
     font-family: 'brandon-grotesque',helvetica,sans-serif;
+}
+h1,h2,h3,h4 {
+	font-family: 'brandon-grotesque', helvetica, sans-serif;
+}
+h2{
+    text-align: center;
 }
 button, a ,h4 {
 	font-family: 'brandon-grotesque',helvetica,sans-serif;
