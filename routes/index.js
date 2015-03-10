@@ -92,30 +92,34 @@ router.post('/checkUser',function(req,res){
 
 
     var statement = 'select * from users where username = ? and password = ?';
-    var query = connection.query(statement,[user,pass], function(err,rows,fields){
-        if(err) throw err;
-              console.log(rows);
-              console.log('Id: '+rows[0].id);
-              console.log('username: '+rows[0].username);
-              
-              sess.id = rows[0].id;
-              sess.email = rows[0].email;
-              sess.username = rows[0].username;
-              //sess.password = rows[0].password;
+    if(user && pass){
+        var query = connection.query(statement,[user,pass], function(err,rows,fields){
+            if(err) throw err;
+                  console.log(rows);
+                  console.log('Id: '+rows[0].id);
+                  console.log('username: '+rows[0].username);
+                  
+                  sess.id = rows[0].id;
+                  sess.email = rows[0].email;
+                  sess.username = rows[0].username;
+                  //sess.password = rows[0].password;
 
-              // console.log('Session Id: '+sess.id);
-              // console.log('Session Email: '+sess.email);
-              // console.log('Session Username: '+sess.username);
-              //console.log('Session Password: '+sess.password);
-              res.render('user',
-                {   
-                    title: 'User Profile',
-                    classname: 'user',
-                    page: 'user',
-                    header: 'header',
-                    data: sess
-                });
-    });
+                  // console.log('Session Id: '+sess.id);
+                  // console.log('Session Email: '+sess.email);
+                  // console.log('Session Username: '+sess.username);
+                  //console.log('Session Password: '+sess.password);
+                  res.render('user',
+                    {   
+                        title: 'User Profile',
+                        classname: 'user',
+                        page: 'user',
+                        header: 'header',
+                        data: sess
+                    });
+        });
+    } else {
+        res.redirect('/loginForm');
+    }
 });
 
 //check user profile session
