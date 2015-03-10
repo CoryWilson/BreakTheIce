@@ -23,7 +23,7 @@ $(function(){
 				type: 'post',
 				data: JSON.stringify(data),
 		        contentType: 'application/json',
-                url: 'http://localhost:3000/coordinates',						
+                url: 'http://localhost:3000/searchResults',
                 success: function(data) {
                     console.log('success');
                     //window.location.href = '/coordinates';  

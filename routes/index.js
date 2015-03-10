@@ -13,6 +13,10 @@ var mysql = require('mysql');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
 var najax = require('najax');
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
 
 var jquery = require('jquery');
 //flickrOptions = {
@@ -166,8 +170,11 @@ router.get('/logout',function(req,res){
 //       })
 // });
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> origin/master
 
 //var geocoderProvider = 'google';
 //var extra = {
@@ -199,6 +206,29 @@ router.get('/logout',function(req,res){
 //});
 
 //works grabs coordinates from browser through ajax call
+<<<<<<< HEAD
+
+
+router.get('/searchResults',function(req,res){
+     var obj = req.body;
+     var lat = obj.lat;
+     var long = obj.long;
+     console.log(lat + ' ' + long);
+     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+    console.log(powderLinesAPI);
+     request(powderLinesAPI, function (error, response, body) {
+         if (!error && response.statusCode == 200) {
+             var results = JSON.parse(body);
+                 res.render('searchResults',
+                 {   title: 'Nearest Mountains',
+                     page: 'Results',
+                     results: results
+                 });
+         }
+
+     });
+});
+=======
 router.post('/coordinates',function(req,res){
 
     var obj = req.body; 
@@ -336,20 +366,29 @@ router.get('/mountain/:triplet',function(req,res){
         }
 
     });
+>>>>>>> origin/master
 
 
-});
+//router.get('/mountain',function(req,res){
+//    var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
+//    request(plAPI, function (error, response, body) {
+//        if (!error && response.statusCode == 200) {
+//            var parsedJSON = JSON.parse(body);
+//            res.render('mountain',
+//            {
+//                title: 'Mountain Info',
+//                classname: 'mountain',
+//                page: 'mountain',
+//                name: parsedJSON.station_information.name
+//            });
+//        }
+//
+//    });
+//
+//
+//});
 
-// router.get('/test',function(req,res){
-//     geocoder.geocode('29 champs elysée paris')
-//         .then(function(res) {
-//             console.log(res);
-//         })
-//         .catch(function(err) {
-//             console.log(err);
-//         });
 
-// });
 
 module.exports = router;
 
