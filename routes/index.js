@@ -12,11 +12,6 @@ var mysql = require('mysql');
 //var liftie = require('liftie');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
-var najax = require('najax');
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
 var jquery = require('jquery');
 //flickrOptions = {
@@ -170,12 +165,6 @@ router.get('/logout',function(req,res){
 //       })
 // });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
-
 //var geocoderProvider = 'google';
 //var extra = {
 //     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
@@ -206,29 +195,29 @@ router.get('/logout',function(req,res){
 //});
 
 //works grabs coordinates from browser through ajax call
-<<<<<<< HEAD
+// <<<<<<< HEAD
 
 
-router.get('/searchResults',function(req,res){
-     var obj = req.body;
-     var lat = obj.lat;
-     var long = obj.long;
-     console.log(lat + ' ' + long);
-     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-    console.log(powderLinesAPI);
-     request(powderLinesAPI, function (error, response, body) {
-         if (!error && response.statusCode == 200) {
-             var results = JSON.parse(body);
-                 res.render('searchResults',
-                 {   title: 'Nearest Mountains',
-                     page: 'Results',
-                     results: results
-                 });
-         }
+// router.get('/searchResults',function(req,res){
+//      var obj = req.body;
+//      var lat = obj.lat;
+//      var long = obj.long;
+//      console.log(lat + ' ' + long);
+//      var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+//     console.log(powderLinesAPI);
+//      request(powderLinesAPI, function (error, response, body) {
+//          if (!error && response.statusCode == 200) {
+//              var results = JSON.parse(body);
+//                  res.render('searchResults',
+//                  {   title: 'Nearest Mountains',
+//                      page: 'Results',
+//                      results: results
+//                  });
+//          }
 
-     });
-});
-=======
+//      });
+// });
+// =======
 router.post('/coordinates',function(req,res){
 
     var obj = req.body; 
@@ -285,28 +274,27 @@ router.get('/searchResults',function(req,res){
 
             for(var i=0;i<results.length;i++){
                 stations.push(results[i].station_information);   
-            }
+            }//end for
             stations.forEach(function(item){
                 name = name.concat(item.name);
                 triplet = triplet.concat(item.triplet);
                 elevation = elevation.concat(item.elevation);
-            });
+            });//end stations foreach
 
-                res.render('results',
-                {   title: 'Nearest Mountains',
-                    page: 'results',
-                    header: 'header',
-                    results: results,
-                    stations: stations,
-                    name : name,
-                    triplet: triplet,
-                    elevation : elevation,
-                    data: sess
-                });
-        }
-
-    });
-});
+            res.render('results',
+            {   title: 'Nearest Mountains',
+                page: 'results',
+                header: 'header',
+                results: results,
+                stations: stations,
+                name : name,
+                triplet: triplet,
+                elevation : elevation,
+                data: sess
+            });//end res.render
+        }//end if
+    });//end request
+});//end router.get
 
 //individual page
 router.get('/mountain/:triplet',function(req,res){
@@ -325,11 +313,10 @@ router.get('/mountain/:triplet',function(req,res){
 
             station.push(results.station_information); 
             
-            conditions.push(results.data);
 
-            // for(var i=0;i<results.length;i++){
-                
-            // }
+            for(var i=0;i<results.length;i++){
+                conditions.push(results.data[i])
+            }
 
             console.log(conditions); 
 
@@ -341,14 +328,14 @@ router.get('/mountain/:triplet',function(req,res){
                     triplet = triplet.concat(item.triplet);
                     elevation = elevation.concat(item.elevation);
                 }
-            });
+            });//end station foreach
             conditions.forEach(function(item){
                 if(item.triplet == req.params.triplet){
                     conditions.push(item);
                     snowWaterEq = snowWaterEq.concat(item.snowWaterEq);
                     snowDepth = snowDepth.concat(item.snowDepth);
                 }
-            });
+            });//end conditions foreach
             res.render('mountain',
             {   title: 'Mountain Info',
                 page: 'mountain',
@@ -362,11 +349,11 @@ router.get('/mountain/:triplet',function(req,res){
                 snowWaterEq : snowWaterEq,
                 snowDepth : snowDepth,
                 data: sess
-            });
-        }
-
-    });
->>>>>>> origin/master
+            });//end res render
+        }//end if !error
+    });//end request
+});//end router.get
+//>>>>>>> origin/master
 
 
 //router.get('/mountain',function(req,res){
