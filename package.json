@@ -20,6 +20,7 @@
     "mongodb": "^1.4.33",
     "morgan": "~1.5.1",
     "mysql": "^2.5.5",
+    "najax": "^0.1.5",
     "node-geocoder": "^2.16.1",
     "passport": "^0.2.1",
     "passport-facebook": "^2.0.0",

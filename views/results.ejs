@@ -7,14 +7,12 @@
     <% include partials/default/header.ejs %>
     <div class="large-9 large-centered columns">
     	<h1>Your Results: </h1>
-		<% for(var i = 0; i<results.length; i++){ %>
-        	<a href="/mountain/station/:<%= results[i].station_information.triplet %>">
+        	<a href="/mountain">
 	        	<div class="searchResults row large-11 large-centered columns">
-	        		<h4><%=results[i].station_information.name %></h4>
-	        		<p><%=results[i].station_information.elevation %> ft</p>
+	        		<h4><%= results %></h4>
+	        		<p><%=item.elevation %> ft</p>
 	        	</div>
         	</a>
-		<% } %>
 	</div>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>
