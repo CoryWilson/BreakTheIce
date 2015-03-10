@@ -12,12 +12,14 @@
       <p><%= name %></p>
       <p><%= triplet %></p>
       <p><%= elevation %></p>
-
-      <p><%= snowWaterEq %></p>
-      <p><%= snowDepth %></p>
       
-
-
+      <% conditions.forEach(function(item){ %>
+        <div>
+          <p><%= item['Date'] %></p>
+          <p><%= item['Snow Water Equivalent (in)'] %></p>
+          <p><%= item['Snow Depth (in)'] %></p>
+        </div>
+      <% }); %>
 
       <% include partials/forms/signUp.ejs %>
 

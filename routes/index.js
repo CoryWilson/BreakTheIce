@@ -306,19 +306,17 @@ router.get('/mountain/:triplet',function(req,res){
             var station = [];
             var conditions = [];
             var name = [];
+            var date = [];
             var triplet = [];
             var elevation = [];
-            var snowWaterEq = [];
-            var snowDepth = [];
 
             station.push(results.station_information); 
             
-
-            for(var i=0;i<results.length;i++){
+            for(var i=0;i<results.data.length;i++){
                 conditions.push(results.data[i])
             }
 
-            console.log(conditions); 
+            //console.log(conditions); 
 
 
             station.forEach(function(item){
@@ -332,8 +330,6 @@ router.get('/mountain/:triplet',function(req,res){
             conditions.forEach(function(item){
                 if(item.triplet == req.params.triplet){
                     conditions.push(item);
-                    snowWaterEq = snowWaterEq.concat(item.snowWaterEq);
-                    snowDepth = snowDepth.concat(item.snowDepth);
                 }
             });//end conditions foreach
             res.render('mountain',
@@ -346,8 +342,6 @@ router.get('/mountain/:triplet',function(req,res){
                 name: name,
                 triplet: triplet,
                 elevation : elevation,
-                snowWaterEq : snowWaterEq,
-                snowDepth : snowDepth,
                 data: sess
             });//end res render
         }//end if !error
