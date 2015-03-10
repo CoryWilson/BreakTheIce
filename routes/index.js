@@ -13,8 +13,12 @@ var mysql = require('mysql');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
 var najax = require('najax');
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
+var jquery = require('jquery');
 //flickrOptions = {
 //    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
 //    secret: "41a710fd1e55ba6b"
@@ -24,9 +28,11 @@ var najax = require('najax');
 //
 //});
 
+
 //global session variable
 var sess;
 
+//mysql connection
 var connection = mysql.createConnection({
     user     : 'root',
     password : 'root',
@@ -35,13 +41,16 @@ var connection = mysql.createConnection({
     database : 'asl_node'
 });
 
-router.get('/',function(req,res){
-    res.render('index',{
-        title: 'Home',
-        page: 'home',
+/* GET home page. */
+router.get('/', function(req, res, next) {
+
+    res.render('index',{title: 'Home | Mountain Reports',
+        classname: 'home',
         header: 'header',
+        page: 'home',
         data: sess
-    })
+        });
+
 });
 
 //SQL Queries
@@ -67,14 +76,13 @@ router.post('/addUser',function(req,res){
 
     var post = {email:emailInput,username:usernameInput,password:passwordInput};
     var statement = 'insert into users set?';
-    var query = connection.query(statement,post,function(err,result){
-
-    });
-
+    if(emailInput && usernameInput && passwordInput){
+        var query = connection.query(statement,post,function(err,result){});
+        res.redirect('/');
+    } else {
+        res.redirect('/');
+    }
     console.log(query.sql);
-
-    res.redirect('/');
-
 });
 
 
@@ -99,9 +107,9 @@ router.post('/checkUser',function(req,res){
               sess.username = rows[0].username;
               //sess.password = rows[0].password;
 
-              console.log('Session Id: '+sess.id);
-              console.log('Session Email: '+sess.email);
-              console.log('Session Username: '+sess.username);
+              // console.log('Session Id: '+sess.id);
+              // console.log('Session Email: '+sess.email);
+              // console.log('Session Username: '+sess.username);
               //console.log('Session Password: '+sess.password);
               res.render('user',
                 {   
@@ -158,6 +166,11 @@ router.get('/logout',function(req,res){
 //       })
 // });
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
 
 //var geocoderProvider = 'google';
 //var extra = {
@@ -189,6 +202,7 @@ router.get('/logout',function(req,res){
 //});
 
 //works grabs coordinates from browser through ajax call
+<<<<<<< HEAD
 
 
 router.get('/searchResults',function(req,res){
@@ -210,6 +224,145 @@ router.get('/searchResults',function(req,res){
 
      });
 });
+=======
+router.post('/coordinates',function(req,res){
+
+    var obj = req.body; 
+    var lat = obj.lat;
+    var long = obj.long;
+    console.log(lat+', '+long);
+
+//     //var obj = {}
+//     // res.render('coordinates',
+//     // {
+//     //     title: 'Coordinates',
+//     //     page: 'coordinates',
+//     //     coordinates: req.body
+//     // });
+});
+
+// router.post('/searchResults',function(req,res){
+//     // var obj = req.body; 
+//     // var lat = obj.lat;
+//     // var long = obj.long;
+//     // console.log(lat+', '+long);
+
+//     najax('/coordinates',
+//     { type:'POST' }, 
+//     function(html){ 
+//         console.log(html); 
+//     })
+
+// var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+//     request(powderLinesAPI, function (error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var results = JSON.parse(body);
+//                 res.render('searchResults',
+//                 {   title: 'Nearest Mountains',
+//                     page: 'Results',
+//                     results: results
+//                 });
+//         }
+
+//     });
+// });
+
+
+//swap out lat and long from geolocation to get complete functionality
+router.get('/searchResults',function(req,res){
+    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
+    request(powderLinesAPI, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var results = JSON.parse(body);
+            var stations = [];
+            var name = [];
+            var triplet = [];
+            var elevation = [];
+
+            for(var i=0;i<results.length;i++){
+                stations.push(results[i].station_information);   
+            }
+            stations.forEach(function(item){
+                name = name.concat(item.name);
+                triplet = triplet.concat(item.triplet);
+                elevation = elevation.concat(item.elevation);
+            });
+
+                res.render('results',
+                {   title: 'Nearest Mountains',
+                    page: 'results',
+                    header: 'header',
+                    results: results,
+                    stations: stations,
+                    name : name,
+                    triplet: triplet,
+                    elevation : elevation,
+                    data: sess
+                });
+        }
+
+    });
+});
+
+//individual page
+router.get('/mountain/:triplet',function(req,res){
+    var plAPI = 'http://api.powderlin.es/station/'+req.params.triplet;
+    console.log(plAPI);
+    request(plAPI, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var results = JSON.parse(body);
+            var station = [];
+            var conditions = [];
+            var name = [];
+            var triplet = [];
+            var elevation = [];
+            var snowWaterEq = [];
+            var snowDepth = [];
+
+            station.push(results.station_information); 
+            
+            conditions.push(results.data);
+
+            // for(var i=0;i<results.length;i++){
+                
+            // }
+
+            console.log(conditions); 
+
+
+            station.forEach(function(item){
+                if(item.triplet == req.params.triplet){
+                    station.push(item);
+                    name = name.concat(item.name);
+                    triplet = triplet.concat(item.triplet);
+                    elevation = elevation.concat(item.elevation);
+                }
+            });
+            conditions.forEach(function(item){
+                if(item.triplet == req.params.triplet){
+                    conditions.push(item);
+                    snowWaterEq = snowWaterEq.concat(item.snowWaterEq);
+                    snowDepth = snowDepth.concat(item.snowDepth);
+                }
+            });
+            res.render('mountain',
+            {   title: 'Mountain Info',
+                page: 'mountain',
+                header: 'header',
+                results: results,
+                station: station,
+                conditions: conditions,
+                name: name,
+                triplet: triplet,
+                elevation : elevation,
+                snowWaterEq : snowWaterEq,
+                snowDepth : snowDepth,
+                data: sess
+            });
+        }
+
+    });
+>>>>>>> origin/master
 
 
 //router.get('/mountain',function(req,res){

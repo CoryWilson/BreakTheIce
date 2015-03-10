@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/default/head.ejs %>
+</head>
+  <body class="<%= page %>">
+    <% include partials/default/header.ejs %>
+    <div class="large-9 large-centered columns">
+    	<h1>Your Results: </h1>
+      <% stations.forEach(function(item){ %>
+        	<a href="/mountain/<%= item.triplet %>">
+	        	<div class="searchResults row large-11 large-centered columns">
+	        		<h4><%= item.name %></h4>
+              <p><%= item.triplet %></p>
+	        		<p><%= item.elevation %> ft</p>
+	        	</div>
+        	</a>
+      <% }); %>
+	</div>
+      <% include partials/default/footer.ejs %>
+      <% include partials/default/jsdefaults.ejs %>
+  </body>
+</html>

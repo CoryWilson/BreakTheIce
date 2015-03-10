@@ -3,15 +3,19 @@
 <head>
   <% include partials/default/head.ejs %>
 </head>
-  <body class="<%=page %>">
+  <body class="<%= page %>">
     <% include partials/default/header.ejs %>
-    <div>
+    <div class="wrapper">
       <div class="jumbotron small-12 small-centered columns">
-        <!-- <h1><%= title %></h1> -->
-        <% include search.ejs %>
       </div>
+      
+      <p><%= name %></p>
+      <p><%= triplet %></p>
+      <p><%= elevation %></p>
 
-
+      <p><%= snowWaterEq %></p>
+      <p><%= snowDepth %></p>
+      
 
 
 

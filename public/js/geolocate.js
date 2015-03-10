@@ -26,6 +26,7 @@ $(function(){
                 url: 'http://localhost:3000/searchResults',
                 success: function(data) {
                     console.log('success');
+                    //window.location.href = '/coordinates';  
                     //console.log(JSON.stringify(data));
                 }
 			});
