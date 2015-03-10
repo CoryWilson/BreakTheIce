@@ -12,9 +12,8 @@ var mysql = require('mysql');
 //var liftie = require('liftie');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
-// var FacebookStrategy = require('passport-facebook').Strategy;
+var najax = require('najax');
+
 
 //flickrOptions = {
 //    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
@@ -159,18 +158,6 @@ router.get('/logout',function(req,res){
 //       })
 // });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-
-    res.render('index',{title: 'Home | Mountain Reports',
-        classname: 'home',
-        header: 'header',
-        page: 'home',
-        data: sess
-        });
-
-});
-
 
 //var geocoderProvider = 'google';
 //var extra = {
@@ -201,88 +188,50 @@ router.get('/', function(req, res, next) {
 // });
 //});
 
-//swap out lat and long from geolocation to get complete functionality
-// router.get('/searchResults',function(req,res){
-//     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
-//     request(powderLinesAPI, function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             var results = JSON.parse(body);
-//                 res.render('searchResults',
-//                 {   title: 'Nearest Mountains',
-//                     page: 'Results',
-//                     results: results
-//                 });
-//         }
-
-//     });
-// });
-
 //works grabs coordinates from browser through ajax call
-router.post('/coordinates',function(req,res){
 
-    var obj = req.body; 
-    var lat = obj.lat;
-    var long = obj.long;
-    console.log(lat+', '+long);
 
-    //var obj = {}
-    // res.render('coordinates',
-    // {
-    //     title: 'Coordinates',
-    //     page: 'coordinates',
-    //     coordinates: req.body
-    // });
+router.get('/searchResults',function(req,res){
+     var obj = req.body;
+     var lat = obj.lat;
+     var long = obj.long;
+     console.log(lat + ' ' + long);
+     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+    console.log(powderLinesAPI);
+     request(powderLinesAPI, function (error, response, body) {
+         if (!error && response.statusCode == 200) {
+             var results = JSON.parse(body);
+                 res.render('searchResults',
+                 {   title: 'Nearest Mountains',
+                     page: 'Results',
+                     results: results
+                 });
+         }
+
+     });
 });
 
-// router.get('/searchResults',function(req,res){
-//     // var obj = req.body; 
-//     // var lat = obj.lat;
-//     // var long = obj.long;
 
-//     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-//     request(powderLinesAPI, function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             var results = JSON.parse(body);
-//                 res.render('searchResults',
-//                 {   title: 'Nearest Mountains',
-//                     page: 'Results',
-//                     results: results
-//                 });
-//         }
-
-//     });
-// });
-
-
-router.get('/mountain',function(req,res){
-    var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
-    request(plAPI, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var parsedJSON = JSON.parse(body);
-            res.render('mountain',
-            {   
-                title: 'Mountain Info',
-                classname: 'mountain',
-                page: 'mountain',
-                name: parsedJSON.station_information.name
-            });
-        }
-
-    });
+//router.get('/mountain',function(req,res){
+//    var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
+//    request(plAPI, function (error, response, body) {
+//        if (!error && response.statusCode == 200) {
+//            var parsedJSON = JSON.parse(body);
+//            res.render('mountain',
+//            {
+//                title: 'Mountain Info',
+//                classname: 'mountain',
+//                page: 'mountain',
+//                name: parsedJSON.station_information.name
+//            });
+//        }
+//
+//    });
+//
+//
+//});
 
 
-});
-
-// router.get('/test',function(req,res){
-//     geocoder.geocode('29 champs elysée paris')
-//         .then(function(res) {
-//             console.log(res);
-//         })
-//         .catch(function(err) {
-//             console.log(err);
-//         });
-
-// });
 
 module.exports = router;
 

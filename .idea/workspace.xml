@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c191df2-c843-4732-b531-ffe6719de603" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/partials/default/loggedin_header.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/partials/forms/signUp.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/userinfo.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/geolocate.js" afterPath="$PROJECT_DIR$/public/js/geolocate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/default/header.ejs" afterPath="$PROJECT_DIR$/views/partials/default/header.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/forms/loginForm.ejs" afterPath="$PROJECT_DIR$/views/partials/forms/loginForm.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mountain.ejs" afterPath="$PROJECT_DIR$/views/mountain.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user.ejs" afterPath="$PROJECT_DIR$/views/user.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/search.ejs" afterPath="$PROJECT_DIR$/views/search.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/searchResults.ejs" afterPath="$PROJECT_DIR$/views/searchResults.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ASL_Node_Project.iws" />
@@ -35,43 +32,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="0" selection-start="4003" selection-end="4003" vertical-scroll-proportion="0.0" vertical-offset="2312" max-vertical-offset="3150">
+            <state line="209" column="0" selection-start="5425" selection-end="5425" vertical-scroll-proportion="1.6020067" vertical-offset="2177" max-vertical-offset="3645">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app.js">
+      <file leaf-file-name="searchResults.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/searchResults.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.67725754" vertical-offset="150" max-vertical-offset="1155">
+            <state line="10" column="8" selection-start="242" selection-end="242" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="420">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loggedin_header.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/partials/default/loggedin_header.ejs">
+      <file leaf-file-name="mountain.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/mountain.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="9" selection-start="231" selection-end="231" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225">
+            <state line="13" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="450">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="geolocate.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/geolocate.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="8" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/search.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="7" selection-start="162" selection-end="162" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="165">
               <folding>
-                <marker date="1425845842000" expanded="true" signature="7:230" placeholder="..." />
-                <marker date="1425845842000" expanded="true" signature="42:220" placeholder="..." />
-                <marker date="1425845842000" expanded="true" signature="76:121" placeholder="..." />
-                <marker date="1425845842000" expanded="true" signature="162:209" placeholder="..." />
+                <marker date="1425950769000" expanded="true" signature="40:161" placeholder="..." />
+                <marker date="1425950769000" expanded="true" signature="118:153" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/user.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="17" selection-start="282" selection-end="282" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="375">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -94,11 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/partials/forms/signUpForm.ejs" />
-        <option value="$PROJECT_DIR$/views/search.ejs" />
-        <option value="$PROJECT_DIR$/views/mountain.ejs" />
-        <option value="$PROJECT_DIR$/views/partials/default/jsdefaults.ejs" />
-        <option value="$PROJECT_DIR$/public/js/geolocate.js" />
         <option value="$PROJECT_DIR$/public/js/client.js" />
         <option value="$PROJECT_DIR$/public/js/inputdata.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
@@ -108,14 +107,19 @@
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/views/partials/forms/loginForm.ejs" />
         <option value="$PROJECT_DIR$/views/partials/default/loggedin_header.ejs" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/public/js/geolocate.js" />
+        <option value="$PROJECT_DIR$/views/partials/default/header.ejs" />
+        <option value="$PROJECT_DIR$/views/search.ejs" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/searchResults.ejs" />
+        <option value="$PROJECT_DIR$/views/mountain.ejs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="19" />
-    <option name="y" value="38" />
+    <option name="x" value="22" />
+    <option name="y" value="34" />
     <option name="width" value="1400" />
     <option name="height" value="746" />
   </component>
@@ -177,64 +181,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ASL_Node_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BreakTheIce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="partials" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ASL_Node_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BreakTheIce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="partials" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ASL_Node_Project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BreakTheIce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -252,6 +198,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -260,14 +214,6 @@
       <option name="saveOutputToFile" value="false" />
       <option name="showConsoleOnStdErr" value="false" />
       <option name="showConsoleOnStdOut" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
@@ -293,13 +239,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="38" width="1400" height="746" extended-state="1" />
+    <frame x="22" y="34" width="1400" height="746" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24981844" sideWeight="0.67241377" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -310,6 +255,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -329,9 +275,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24981844" sideWeight="0.67241377" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -346,32 +292,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/mountain.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="0.30279502" vertical-offset="0" max-vertical-offset="644" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/inputdata.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="50" selection-end="50" vertical-scroll-proportion="0.08982036" vertical-offset="0" max-vertical-offset="668">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/forms/signUpForm.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="24" selection-start="94" selection-end="101" vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="660">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/forms/signUp.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="147" selection-end="147" vertical-scroll-proportion="0.26946107" vertical-offset="0" max-vertical-offset="1695">
@@ -381,9 +301,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/userinfo.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="5" selection-start="123" selection-end="123" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="360">
-          <folding />
-        </state>
+        <state line="8" column="5" selection-start="123" selection-end="123" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flow_chart.JPG">
@@ -393,23 +311,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="16" selection-start="261" selection-end="261" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="585">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/default/header.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="185" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="225">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/user.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="17" selection-start="282" selection-end="282" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="375">
-          <folding />
-        </state>
+        <state line="12" column="16" selection-start="261" selection-end="261" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="585" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
@@ -419,42 +321,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/default/loggedin_header.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="9" selection-start="231" selection-end="231" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225">
-          <folding>
-            <marker date="1425845842000" expanded="true" signature="7:230" placeholder="..." />
-            <marker date="1425845842000" expanded="true" signature="42:220" placeholder="..." />
-            <marker date="1425845842000" expanded="true" signature="76:121" placeholder="..." />
-            <marker date="1425845842000" expanded="true" signature="162:209" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/partials/forms/loginForm.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="99" selection-start="1070" selection-end="1070" vertical-scroll-proportion="0.58229816" vertical-offset="0" max-vertical-offset="660">
-          <folding />
-        </state>
+        <state line="25" column="99" selection-start="1070" selection-end="1070" vertical-scroll-proportion="0.58229816" vertical-offset="0" max-vertical-offset="660" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/node_modules/serve-static/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0015528" vertical-offset="645" max-vertical-offset="1350">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0015528" vertical-offset="645" max-vertical-offset="1350" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/default/loggedin_header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="9" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="225">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/views/user.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="0" selection-start="4003" selection-end="4003" vertical-scroll-proportion="0.0" vertical-offset="2312" max-vertical-offset="3150">
+        <state line="10" column="0" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="330">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.67725754" vertical-offset="150" max-vertical-offset="1155">
+        <state line="41" column="0" selection-start="989" selection-end="989" vertical-scroll-proportion="1.0284281" vertical-offset="0" max-vertical-offset="1095">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/default/header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="9" selection-start="481" selection-end="481" vertical-scroll-proportion="0.6010453" vertical-offset="0" max-vertical-offset="574">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/search.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="7" selection-start="162" selection-end="162" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="165">
+          <folding>
+            <marker date="1425950769000" expanded="true" signature="40:161" placeholder="..." />
+            <marker date="1425950769000" expanded="true" signature="118:153" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/geolocate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="8" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/searchResults.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="8" selection-start="242" selection-end="242" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/mountain.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="450">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="209" column="0" selection-start="5425" selection-end="5425" vertical-scroll-proportion="1.6020067" vertical-offset="2177" max-vertical-offset="3645">
           <folding />
         </state>
       </provider>
