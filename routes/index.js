@@ -12,11 +12,9 @@ var mysql = require('mysql');
 //var liftie = require('liftie');
 var geolocation = require('geolocation');
 var Flickr = require("flickrapi");
-var najax = require('najax');
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
+
+
 
 var jquery = require('jquery');
 //flickrOptions = {
@@ -170,11 +168,9 @@ router.get('/logout',function(req,res){
 //       })
 // });
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/master
+
 
 //var geocoderProvider = 'google';
 //var extra = {
@@ -205,36 +201,35 @@ router.get('/logout',function(req,res){
 // });
 //});
 
-//works grabs coordinates from browser through ajax call
-<<<<<<< HEAD
 
 
-router.get('/searchResults',function(req,res){
-     var obj = req.body;
-     var lat = obj.lat;
-     var long = obj.long;
-     console.log(lat + ' ' + long);
-     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-    console.log(powderLinesAPI);
-     request(powderLinesAPI, function (error, response, body) {
-         if (!error && response.statusCode == 200) {
-             var results = JSON.parse(body);
-                 res.render('searchResults',
-                 {   title: 'Nearest Mountains',
-                     page: 'Results',
-                     results: results
-                 });
-         }
 
-     });
-});
-=======
-router.post('/coordinates',function(req,res){
+//router.get('/searchResults',function(req,res){
+//     var obj = req.body;
+//     var lat = obj.lat;
+//     var long = obj.long;
+//     console.log(lat + ' ' + long);
+//     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
+//    console.log(powderLinesAPI);
+//     request(powderLinesAPI, function (error, response, body) {
+//         if (!error && response.statusCode == 200) {
+//             var results = JSON.parse(body);
+//                 res.render('searchResults',
+//                 {   title: 'Nearest Mountains',
+//                     page: 'Results',
+//                     results: results
+//                 });
+//         }
+//
+//     });
+//});
 
-    var obj = req.body; 
-    var lat = obj.lat;
-    var long = obj.long;
-    console.log(lat+', '+long);
+//router.post('/coordinates',function(req,res){
+//
+//    var obj = req.body;
+//    var lat = obj.lat;
+//    var long = obj.long;
+//    console.log(lat+', '+long);
 
 //     //var obj = {}
 //     // res.render('coordinates',
@@ -243,7 +238,7 @@ router.post('/coordinates',function(req,res){
 //     //     page: 'coordinates',
 //     //     coordinates: req.body
 //     // });
-});
+//});
 
 // router.post('/searchResults',function(req,res){
 //     // var obj = req.body; 
@@ -274,7 +269,9 @@ router.post('/coordinates',function(req,res){
 
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
+
     var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
+
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
@@ -323,6 +320,7 @@ router.get('/mountain/:triplet',function(req,res){
             var snowWaterEq = [];
             var snowDepth = [];
 
+
             station.push(results.station_information); 
             
             conditions.push(results.data);
@@ -342,6 +340,7 @@ router.get('/mountain/:triplet',function(req,res){
                     elevation = elevation.concat(item.elevation);
                 }
             });
+
             conditions.forEach(function(item){
                 if(item.triplet == req.params.triplet){
                     conditions.push(item);
@@ -366,7 +365,7 @@ router.get('/mountain/:triplet',function(req,res){
         }
 
     });
->>>>>>> origin/master
+});
 
 
 //router.get('/mountain',function(req,res){
