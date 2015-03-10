@@ -244,24 +244,29 @@ router.get('/searchResults',function(req,res){
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
-            // var stations = [];
-            // var name = [];
-            // var elevation = [];
+            var stations = [];
+            var name = [];
+            var triplet = [];
+            var elevation = [];
 
-            // stations = results[0].station_information;
-            // console.log(stations);
-            // results[0].station_information.forEach(function(item){
-            //     name = name.concat(item.name);
-            //     elevation = elevation.concat(item.elevation);
-            // });
+            for(var i=0;i<results.length;i++){
+                stations.push(results[i].station_information);   
+            }
+            stations.forEach(function(item){
+                name = name.concat(item.name);
+                triplet = triplet.concat(item.triplet);
+                elevation = elevation.concat(item.elevation);
+            });
 
-                res.render('searchResults',
+                res.render('results',
                 {   title: 'Nearest Mountains',
                     page: 'results',
                     header: 'header',
                     results: results,
-                    // name : name,
-                    // elevation : elevation,
+                    stations: stations,
+                    name : name,
+                    triplet: triplet,
+                    elevation : elevation,
                     data: sess
                 });
         }
@@ -270,31 +275,59 @@ router.get('/searchResults',function(req,res){
 });
 
 //individual page
-router.post('/mountain/station/:triplet',function(req,res){
-    var plAPI = 'http://api.powderlin.es/station/672:WA:SNTL?days=20';
+router.get('/mountain/:triplet',function(req,res){
+    var plAPI = 'http://api.powderlin.es/station/'+req.params.triplet;
+    console.log(plAPI);
     request(plAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
-            // var stations = [];
-            // var name = [];
-            // stations = results.station_information;
-            // results.station_information.forEach(function(item){
-            //     if(item.triplet == req.params.triplet){
-            //         stations.push(item);
-            //         name = stations.concat(item.name);
-            //     }
+            var station = [];
+            var conditions = [];
+            var name = [];
+            var triplet = [];
+            var elevation = [];
+            var snowWaterEq = [];
+            var snowDepth = [];
+
+            station.push(results.station_information); 
+            
+            conditions.push(results.data);
+
+            // for(var i=0;i<results.length;i++){
                 
-            // });
-            //<%= results[i].station_information.triplet %>
+            // }
+
+            console.log(conditions); 
+
+
+            station.forEach(function(item){
+                if(item.triplet == req.params.triplet){
+                    station.push(item);
+                    name = name.concat(item.name);
+                    triplet = triplet.concat(item.triplet);
+                    elevation = elevation.concat(item.elevation);
+                }
+            });
+            conditions.forEach(function(item){
+                if(item.triplet == req.params.triplet){
+                    conditions.push(item);
+                    snowWaterEq = snowWaterEq.concat(item.snowWaterEq);
+                    snowDepth = snowDepth.concat(item.snowDepth);
+                }
+            });
             res.render('mountain',
-            {   
-                title: 'Mountain Info',
-                classname: 'mountain',
+            {   title: 'Mountain Info',
                 page: 'mountain',
+                header: 'header',
                 results: results,
+                station: station,
+                conditions: conditions,
+                name: name,
+                triplet: triplet,
+                elevation : elevation,
+                snowWaterEq : snowWaterEq,
+                snowDepth : snowDepth,
                 data: sess
-                // name: name,
-                // stations: stations
             });
         }
 

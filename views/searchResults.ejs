@@ -7,8 +7,8 @@
     <% include partials/default/header.ejs %>
     <div class="large-9 large-centered columns">
     	<h1>Your Results: </h1>
-		<% for(var i = 0; i<results.length; i++){ %>
-        	<a href="/mountain/station/:<%= results[i].station_information.triplet %>">
+		<% stations.forEach(function(item) { %>
+        	<a href="/mountain/station/item.triplet%>">
 	        	<div class="searchResults row large-11 large-centered columns">
 	        		<h4><%=results[i].station_information.name %></h4>
 	        		<p><%=results[i].station_information.elevation %> ft</p>

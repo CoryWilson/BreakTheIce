@@ -3,16 +3,19 @@
 <head>
   <% include partials/default/head.ejs %>
 </head>
-  <body class="<%=page %>">
+  <body class="<%= page %>">
     <% include partials/default/header.ejs %>
     <div class="large-9 large-centered columns">
     	<h1>Your Results: </h1>
-        	<a href="/mountain">
+      <% stations.forEach(function(item){ %>
+        	<a href="/mountain/<%= item.triplet %>">
 	        	<div class="searchResults row large-11 large-centered columns">
-	        		<h4><%= results %></h4>
-	        		<p><%=item.elevation %> ft</p>
+	        		<h4><%= item.name %></h4>
+              <p><%= item.triplet %></p>
+	        		<p><%= item.elevation %> ft</p>
 	        	</div>
         	</a>
+      <% }); %>
 	</div>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>

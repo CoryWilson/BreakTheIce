@@ -5,11 +5,10 @@
 </head>
 
 
-  <body class="<%=page %>">
+  <body class="<%= page %>">
     <% include partials/default/header.ejs %>
     <div class="wrapper">
       <div class="jumbotron small-12 small-centered columns">
-        <!-- <h1><%= title %></h1> -->
         <div class="content large-8 large-centered columns">
           <div class="left">
             <h1>Break The Ice</h1>
@@ -23,7 +22,7 @@
       
       <% if(data){ %>
         
-      <% } else { %>
+      <% }  else { %>
         <% include partials/forms/signUpForm.ejs %>
       <% }; %>
       <p>Click the button to get your coordinates.</p>
