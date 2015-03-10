@@ -6,6 +6,7 @@ var https = require('https');
 
 var request = require('request');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
@@ -26,6 +27,8 @@ var jquery = require('jquery');
 
 //global session variable
 var sess;
+var lat;
+var lng;
 
 //mysql connection
 var connection = mysql.createConnection({
@@ -89,9 +92,7 @@ router.post('/checkUser',function(req,res){
     var user = req.body.username;
     var pass = req.body.password;
 
-
-    var statement = 'select * from users where username = ? and password = ?';
-    if(user && pass){
+        var statement = 'select * from users where username = ? and password = ?';
         var query = connection.query(statement,[user,pass], function(err,rows,fields){
             if(err) throw err;
                   console.log(rows);
@@ -116,9 +117,11 @@ router.post('/checkUser',function(req,res){
                         data: sess
                     });
         });
-    } else {
-        res.redirect('/loginForm');
-    }
+
+    
+    // } else {
+    //     res.redirect('/loginForm');
+    // }
 });
 
 //check user profile session
@@ -195,50 +198,12 @@ router.get('/logout',function(req,res){
 //});
 
 //works grabs coordinates from browser through ajax call
-// <<<<<<< HEAD
-
-
-// router.get('/searchResults',function(req,res){
-//      var obj = req.body;
-//      var lat = obj.lat;
-//      var long = obj.long;
-//      console.log(lat + ' ' + long);
-//      var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-//     console.log(powderLinesAPI);
-//      request(powderLinesAPI, function (error, response, body) {
-//          if (!error && response.statusCode == 200) {
-//              var results = JSON.parse(body);
-//                  res.render('searchResults',
-//                  {   title: 'Nearest Mountains',
-//                      page: 'Results',
-//                      results: results
-//                  });
-//          }
-
-//      });
-// });
-// =======
-router.post('/coordinates',function(req,res){
-
-    var obj = req.body; 
-    var lat = obj.lat;
-    var long = obj.long;
-    console.log(lat+', '+long);
-
-//     //var obj = {}
-//     // res.render('coordinates',
-//     // {
-//     //     title: 'Coordinates',
-//     //     page: 'coordinates',
-//     //     coordinates: req.body
-//     // });
-});
 
 // router.post('/searchResults',function(req,res){
-//     // var obj = req.body; 
-//     // var lat = obj.lat;
-//     // var long = obj.long;
-//     // console.log(lat+', '+long);
+    // var obj = req.body; 
+    // var lat = obj.lat;
+    // var long = obj.long;
+    // console.log(lat+', '+long);
 
 //     najax('/coordinates',
 //     { type:'POST' }, 
@@ -260,10 +225,16 @@ router.post('/coordinates',function(req,res){
 //     });
 // });
 
+var coordinates = router.post('/coordinates',function(req,res){
+    var obj = req.body;
+    lat = obj.lat;
+    lng = obj.lng;
+    res.redirect('/searchResults');
+});
 
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
-    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat=47.3974&lng=-121.3958&data=true&days=10&count=10';
+    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+lng+'&data=true&days=0&count=5';
     request(powderLinesAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
@@ -297,16 +268,22 @@ router.get('/searchResults',function(req,res){
 });//end router.get
 
 //individual page
+
+//weather call with lat and long from station info
+//flickr call with name of station
+
 router.get('/mountain/:triplet',function(req,res){
     var plAPI = 'http://api.powderlin.es/station/'+req.params.triplet;
     console.log(plAPI);
+
     request(plAPI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var results = JSON.parse(body);
             var station = [];
             var conditions = [];
             var name = [];
-            var date = [];
+            var lat = [];
+            var lng = [];
             var triplet = [];
             var elevation = [];
 
@@ -316,15 +293,14 @@ router.get('/mountain/:triplet',function(req,res){
                 conditions.push(results.data[i])
             }
 
-            //console.log(conditions); 
-
-
             station.forEach(function(item){
                 if(item.triplet == req.params.triplet){
                     station.push(item);
                     name = name.concat(item.name);
                     triplet = triplet.concat(item.triplet);
                     elevation = elevation.concat(item.elevation);
+                    lat = lat.concat(item.location.lat);
+                    lng = lng.concat(item.location.lng);
                 }
             });//end station foreach
             conditions.forEach(function(item){
@@ -332,6 +308,22 @@ router.get('/mountain/:triplet',function(req,res){
                     conditions.push(item);
                 }
             });//end conditions foreach
+
+            //weather underground api call by lat & long
+            var wAPI = 'http://api.wunderground.com/api/9223f36975c7d646/geolookup/q/'+lat+','+lng+'.json';
+            console.log(wAPI);
+
+            var weatherReq = request(wAPI, function(e,r,b){
+                if(!e && r.statusCode == 200){
+                    var weather = JSON.parse(b);
+                    // var weather = [];
+                    // //console.log(weatherJSON);
+                    // weather.push(weatherJSON.location);
+                    // console.log(weather);
+                    var city = weather.location.city;
+                }
+            });
+
             res.render('mountain',
             {   title: 'Mountain Info',
                 page: 'mountain',
@@ -340,6 +332,10 @@ router.get('/mountain/:triplet',function(req,res){
                 station: station,
                 conditions: conditions,
                 name: name,
+                // weather: weather,
+                // city: city,
+                lat: lat,
+                lng: lng,
                 triplet: triplet,
                 elevation : elevation,
                 data: sess
@@ -347,29 +343,5 @@ router.get('/mountain/:triplet',function(req,res){
         }//end if !error
     });//end request
 });//end router.get
-//>>>>>>> origin/master
-
-
-//router.get('/mountain',function(req,res){
-//    var plAPI = 'http://api.powderlin.es/station/791:WA:SNTL?start_date=2013-01-15&end_date=2013-01-15';
-//    request(plAPI, function (error, response, body) {
-//        if (!error && response.statusCode == 200) {
-//            var parsedJSON = JSON.parse(body);
-//            res.render('mountain',
-//            {
-//                title: 'Mountain Info',
-//                classname: 'mountain',
-//                page: 'mountain',
-//                name: parsedJSON.station_information.name
-//            });
-//        }
-//
-//    });
-//
-//
-//});
-
-
 
 module.exports = router;
-

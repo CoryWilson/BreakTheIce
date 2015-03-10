@@ -6,21 +6,27 @@
   <body class="<%= page %>">
     <% include partials/default/header.ejs %>
     <div class="wrapper">
-      <div class="jumbotron small-12 small-centered columns">
-      </div>
       
-      <p><%= name %></p>
-      <p><%= triplet %></p>
-      <p><%= elevation %></p>
-      
-      <% conditions.forEach(function(item){ %>
-        <div>
-          <p><%= item['Date'] %></p>
-          <p><%= item['Snow Water Equivalent (in)'] %></p>
-          <p><%= item['Snow Depth (in)'] %></p>
-        </div>
-      <% }); %>
+      <div class="content small-11 small-centered medium-10 columns">
 
+        <h2><%= name %></h2>
+        
+        <p>Station Triplet: <%= triplet %></p>
+        <p>Elevation: <%= elevation %> ft</p>
+        <p>Latitude: <%= lat %></p>
+        <p>Longitude: <%= lng %></p>
+
+        <img src="" />
+
+        <% conditions.forEach(function(item){ %>
+          <div class="searchResults">
+            <h3>Weather For: <%= item['Date'] %></h3>
+            <p>Snow Water Equivalend in Inches: <%= item['Snow Water Equivalent (in)'] %></p>
+            <p>Snow Depth in Inches: <%= item['Snow Depth (in)'] %></p>
+          </div>
+        <% }); %>
+
+      </div>
       <% include partials/forms/signUp.ejs %>
 
       <% include partials/default/footer.ejs %>

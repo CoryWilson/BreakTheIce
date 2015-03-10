@@ -1,5 +1,5 @@
 $(function(){
-	$('.coordinates').click(function(e){
+	$('.search').click(function(e){
 		e.preventDefault();
 		var demo = $('#demo');
 		var msg = 'sorry, no bueno';
@@ -7,6 +7,7 @@ $(function(){
 		if(Modernizr.geolocation){
 			navigator.geolocation.getCurrentPosition(success,fail);
 			demo.html('checking...');
+			//window.location.href = 'localhost:3000/searchResults';
 
 		}	else{
 			demo.html(msg);
@@ -17,19 +18,20 @@ $(function(){
 			//demo.html(lat+', '+long);
 			var data = {};
 			data.lat = position.coords.latitude;
-			data.long = position.coords.longitude;
+			data.lng = position.coords.longitude;
+			//$.cookie('coordinates',{lat:data.lat,lng:data.lng});
 		
 			$.ajax({
+				url: '/coordinates/',
 				type: 'post',
 				data: JSON.stringify(data),
 		        contentType: 'application/json',
-                url: 'http://localhost:3000/searchResults',
+                jsonpCallback: 'callback',
                 success: function(data) {
-                    console.log('success');
-                    //window.location.href = '/coordinates';  
-                    //console.log(JSON.stringify(data));
+                    console.log(data);
                 }
 			});
+			//window.location.href = 'localhost:3000/searchResults';
 		}
 
 		function fail(msg){
