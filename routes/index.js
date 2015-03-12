@@ -272,10 +272,14 @@ router.get('/mountain/:triplet',function(req,res){
         });//end conditions foreach
 
         api.weatherCall(lat,lng,function(weather){
-
+            console.log(weather);
             var city = weather.location.city;
             var state = weather.location.state;
             var location = city+', '+state;
+
+            var temp = weather.current_observation.temp_f;
+            var windchill = weather.current_observation.windchill_f;
+            var humidity = weather.current_observation.relative_humidity;
 
             api.flickrCall(lat,lng,function(photos){
 
@@ -292,6 +296,9 @@ router.get('/mountain/:triplet',function(req,res){
                     city: city,
                     state: state,
                     location: location,
+                    temp: temp,
+                    windchill: windchill,
+                    humidity: humidity,
                     lat: lat,
                     lng: lng,
                     triplet: triplet,

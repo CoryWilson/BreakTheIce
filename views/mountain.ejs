@@ -44,15 +44,21 @@
             <h4>Elevation:</h4> <p><%= elevation %> ft</p>
             <h4>Latitude:</h4> <p><%= lat %></p>
             <h4>Longitude:</h4> <p><%= lng %></p>
+
+            <h3>Current Weather:</h3>
+            <h4>Temperature: </h4><p><%= temp %>&deg;</p>
+            <h4>Windchill: </h4><p><%= windchill %>&deg;</p>
+            <h4>Humidity: </h4><p><%= humidity %></p>
+
           </div>
           <div class="small-12 large-6 large-offset-1 columns">
               <% conditions.forEach(function(item){ %>
                 <div class="roundbox weather">
                   <h3>Snow Conditions For: <%= item['Date'] %></h3>
-                  <h4>Snow Water Equivalend in Inches:</h4> 
-                    <p><%= item['Snow Water Equivalent (in)'] %></p>
-                  <h4>Snow Depth in Inches:</h4>
-                    <p><%= item['Snow Depth (in)'] %></p>
+                  <h4>Snow Water Equivalend:</h4> 
+                    <p><%= item['Snow Water Equivalent (in)'] %>&quot;</p>
+                  <h4>Snow Depth:</h4>
+                    <p><%= item['Snow Depth (in)'] %>&quot;</p>
                 </div>
               <% }); %>
           </div>
