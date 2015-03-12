@@ -272,7 +272,6 @@ router.get('/mountain/:triplet',function(req,res){
         });//end conditions foreach
 
         api.weatherCall(lat,lng,function(weather){
-            console.log(weather);
             var city = weather.location.city;
             var state = weather.location.state;
             var location = city+', '+state;

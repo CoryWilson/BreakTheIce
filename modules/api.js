@@ -54,7 +54,6 @@ exports.flickrCall = function(lat,lng,callback){
 
 exports.weatherCall = function(lat,lng,callback){
     var wAPI = 'http://api.wunderground.com/api/9223f36975c7d646/geolookup/conditions/q/'+lat+','+lng+'.json';
-    console.log(wAPI);
     var weatherReq = request(wAPI, function(error,response,body){
         if(!error && response.statusCode == 200){
             var weather = JSON.parse(body);
