@@ -10,7 +10,6 @@ var cookieParser = require('cookie-parser');
 var router = express.Router();
 var url = require('url');
 var mysql = require('mysql');
-//var liftie = require('liftie');
 var geolocation = require('geolocation');
 var jquery = require('jquery');
 
@@ -32,7 +31,6 @@ var connection = mysql.createConnection({
     database : 'asl_node'
 });
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -48,7 +46,6 @@ router.get('/', function(req, res, next) {
 });
 
 //SQL Queries
-
 //Login Form 
 router.get('/loginForm',function(req,res){
 
@@ -79,7 +76,6 @@ router.post('/addUser',function(req,res){
     console.log(query.sql);
 });
 
-
 //Checking User
 router.post('/checkUser',function(req,res){
  
@@ -87,38 +83,21 @@ router.post('/checkUser',function(req,res){
 
     var user = req.body.username;
     var pass = req.body.password;
-
+    if(user == '' && pass == ''){
+        res.redirect('/loginForm');
+    } else {
         var statement = 'select * from users where username = ? and password = ?';
         var query = connection.query(statement,[user,pass], function(err,rows,fields){
             if(err) throw err;
-            //console.log(rows);
             console.log('Id: '+rows[0].id);
             console.log('username: '+rows[0].username);
 
             sess.id = rows[0].id;
             sess.email = rows[0].email;
             sess.username = rows[0].username;
-            //sess.password = rows[0].password;
-
-            console.log('Session Id: '+sess.id);
-            console.log('Session Email: '+sess.email);
-            console.log('Session Username: '+sess.username);
-            //console.log('Session Password: '+sess.password);
-            // res.render('user',
-            //   {   
-            //       title: 'User Profile',
-            //       classname: 'user',
-            //       page: 'user',
-            //       header: 'header',
-            //       data: sess
-            //   });  
             res.redirect('/');
         });
-
-    
-    // } else {
-    //     res.redirect('/loginForm');
-    // }
+    }
 });
 
 //check user profile session
@@ -136,20 +115,6 @@ router.get('/profile',function(req,res){
                 elevation = elevation.concat(item.elevation);
             });//end favs foreach
 
-            console.log('favorites name: '+name);
-
-            /*
-            <%for(var i = 0;i<ratings.length; i++){%>
-              <a href="/mountain/<%= i.rTriplet %>">
-                <div class="ratings">
-                  <p>Name: <%= i.rName %></p>
-                  <p>Station Triplet: <%= i.rTriplet %></p>
-                  <p>Elevation: <%= i.rElevation %> ft</p>
-                </div>
-              </a>
-            <% } %>
-            */
-
             sql.ratings(username,function(ratings){
                 var rName = [];
                 var rTriplet = [];
@@ -161,9 +126,6 @@ router.get('/profile',function(req,res){
                     rElevation = rElevation.concat(i.elevation);
                 });//end ratings for each
 
-                console.log('rName: '+rName);
-                console.log('rTriplet: '+rTriplet);
-                console.log('rElevation: '+rElevation);
                 res.render('user',
                 {   
                     title: 'User Profile',
@@ -205,8 +167,6 @@ var coordinates = router.post('/coordinates',function(req,res){
     lng = obj.lng;
     res.redirect('/searchResults');
 });
-
-
 
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
@@ -282,7 +242,6 @@ router.get('/mountain/:triplet',function(req,res){
         var name = [];
         lat = [];
         lng = [];
-        //triplet = [];
         var rTriplet = [];
         var elevation = [];
         var rElevation = [];
@@ -301,7 +260,6 @@ router.get('/mountain/:triplet',function(req,res){
             if(item.triplet == req.params.triplet){
                 station.push(item);
                 name = name.concat(item.name);
-                //triplet = triplet.concat(item.triplet);
                 elevation = elevation.concat(item.elevation);
                 lat = lat.concat(item.location.lat);
                 lng = lng.concat(item.location.lng);
@@ -313,18 +271,13 @@ router.get('/mountain/:triplet',function(req,res){
             }
         });//end conditions foreach
 
-        
-
         api.weatherCall(lat,lng,function(weather){
-            //console.log(weatherObj);
-            //console.log(weather);
+
             var city = weather.location.city;
             var state = weather.location.state;
-            var location = city;
-            //console.log(location);
+            var location = city+', '+state;
 
             api.flickrCall(lat,lng,function(photos){
-            //console.log(photos);    
 
                 res.render('mountain',
                 {   title: 'Mountain Info',
@@ -333,31 +286,21 @@ router.get('/mountain/:triplet',function(req,res){
                     results: results,
                     station: station,
                     photos: photos,
-                    // farmId: farmId,
-                    // serverId: serverId,
-                    // photoSecret: photoSecret,
-                    // photoId: photoId,
                     conditions: conditions,
                     name: name,
                     weather: weather,
                     city: city,
-                    //farmId: farmId,
+                    state: state,
+                    location: location,
                     lat: lat,
                     lng: lng,
                     triplet: triplet,
                     elevation : elevation,
-                    //rating: rating,
                     data: sess
                 });//end res render
-
             });//end flickr api call
-            
-        });// end weather api call
-
-        
-        
+        });// end weather api call    
     });///end powderlines station api call
-
 });//end router.get
 
 //sup
