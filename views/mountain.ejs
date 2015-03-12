@@ -2,15 +2,29 @@
 <html>
 <head>
   <% include partials/default/head.ejs %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCy3kAz1R6WFKNrSL0wqE0qVcJwd9HSzJ4"></script>
+  <script>
+  //     function initialize() {
+  //       var mapOptions = {
+  //         zoom: 8,
+  //         center: new google.maps.LatLng(<%=lat%>, <%=lng%>)
+  //       };
+  //       var map = new google.maps.Map(document.getElementById('map-canvas'),
+  //         mapOptions);
+  //       }
+
+  //       google.maps.event.addDomListener(window, 'load', initialize);
+
+  //     </script>
 </head>
   <body class="<%= page %>">
     <% include partials/default/header.ejs %>
     <div class="wrapper">
       
       <div class="content small-12 small-centered medium-10 columns">
-
+        
         <h2><%= name %></h2>
-    
+        
         <div class="slick row small-12 small-centered columns">
           <% for(var i = 0; i<photos.length; i++){%>
              <div>
@@ -30,6 +44,12 @@
           </div>
           <% } %>
         </div>
+        <iframe
+          class="small-12 small-centered columns"
+          height="400"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBmRLUChuDOsWWZFEkI_zxlCOwQj1h6Gos&center=<%=lat%>,<%=lng%>&zoom=12&maptype=satellite">
+        </iframe>
         <div class="row details-weather">
           <div class="roundbox details small-12 large-5 columns">
             <h3>Details For: <%= name %></h3>
