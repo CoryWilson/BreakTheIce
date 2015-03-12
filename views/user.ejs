@@ -20,15 +20,19 @@
         <% }); %>
       </div>
 
+
+
       <div class="small-12 medium-6 columns">
         <h2>Your Ratings</h2>
-        <a href="/mountain/">
-          <div class="ratings">
-            <p>Name: </p>
-            <p>Station Triplet: </p>
-            <p>Elevation: </p>
-          </div>
-        </a>
+        <% ratings.forEach(function(i){ %>
+          <a href="/mountain/<%= i.triplet %>">
+            <div class="ratings">
+              <p>Name: <%= i.name %></p>
+              <p>Station Triplet: <%= i.triplet %></p>
+              <p>Elevation: <%= i.elevation %> ft</p>
+            </div>
+          </a>
+        <% }); %>
       </div>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>

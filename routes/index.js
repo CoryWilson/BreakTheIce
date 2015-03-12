@@ -17,7 +17,7 @@ var jquery = require('jquery');
 var api = require('../modules/api.js');
 var sql = require('../modules/sql.js');
 
-//global session variable
+//session variable
 var sess;
 var lat;
 var lng;
@@ -136,33 +136,34 @@ router.get('/profile',function(req,res){
                 elevation = elevation.concat(item.elevation);
             });//end favs foreach
 
-            console.log(favs);
+            console.log('favorites name: '+name);
 
-            // sql.ratings(username,function(ratings){
-            //     var rName = [];
-            //     var rTriplet = [];
-            //     var rElevation = [];
+            /*
+            <%for(var i = 0;i<ratings.length; i++){%>
+              <a href="/mountain/<%= i.rTriplet %>">
+                <div class="ratings">
+                  <p>Name: <%= i.rName %></p>
+                  <p>Station Triplet: <%= i.rTriplet %></p>
+                  <p>Elevation: <%= i.rElevation %> ft</p>
+                </div>
+              </a>
+            <% } %>
+            */
 
-            //     ratings.forEach(function(x){
-            //         rName = rTriplet.concat(x.name);
-            //         rTriplet = rTriplet.concat(x.triplet);
-            //         rElevation = rElevation.concat(x.elevation);
-            //     });
+            sql.ratings(username,function(ratings){
+                var rName = [];
+                var rTriplet = [];
+                var rElevation = [];
 
-            // <% console.log(ratings)%>
+                ratings.forEach(function(i){
+                    rName = rName.concat(i.name);
+                    rTriplet = rTriplet.concat(i.triplet);
+                    rElevation = rElevation.concat(i.elevation);
+                });//end ratings for each
 
-    
-
-            // <% ratings.forEach(function(i){ %>
-            // <a href="/mountain/<%= i.rTriplet %>">
-            //     <div class="searchResults favorites">
-            //         <p>Name: <%= i.rName %></p>
-            //         <p>Station Triplet: <%= i.rTriplet %></p>
-            //         <p>Elevation: <%= i.rElevation %> ft</p>
-            //     </div>
-            // </a>
-            // <% }); %>
-
+                console.log('rName: '+rName);
+                console.log('rTriplet: '+rTriplet);
+                console.log('rElevation: '+rElevation);
                 res.render('user',
                 {   
                     title: 'User Profile',
@@ -173,14 +174,14 @@ router.get('/profile',function(req,res){
                     name: name,
                     triplet: triplet,
                     elevation: elevation,
-                    //ratings: ratings,
-                    // rName: rName,
-                    // rTriplet: rTriplet,
-                    // rElevation: rElevation,
+                    ratings: ratings,
+                    rName: rName,
+                    rTriplet: rTriplet,
+                    rElevation: rElevation,
                     data: sess
-                });//end render
-            // });
-        });
+                });//end render   
+            });//end ratings
+        });//end favorites
     }//end if
        else {
         res.redirect('/');
@@ -243,11 +244,12 @@ router.get('/searchResults',function(req,res){
 });//end router.get
 
 //individual page
+var triplet;
 
 //weather call with lat and long from station info
 //flickr call with name of station
 router.get('/mountain/:triplet',function(req,res){
-    var triplet = req.params.triplet;
+    triplet = req.params.triplet;
 
     router.post('/addFavorite',function(req,res){
         username = sess.username;
@@ -257,8 +259,6 @@ router.get('/mountain/:triplet',function(req,res){
         var statement = 'insert into favorites set?';
         var query = connection.query(statement,post,function(err,callback){});
         
-        triplet = null;
-
         console.log(query.sql);
         res.redirect('/searchResults');
     });// end add favorite
@@ -272,8 +272,6 @@ router.get('/mountain/:triplet',function(req,res){
         var statement = 'insert into ratings set?';
         var query = connection.query(statement,post,function(err,callback){});
         
-        triplet = null;
-
         console.log(query.sql);
         res.redirect('/searchResults');
     });// end rate
