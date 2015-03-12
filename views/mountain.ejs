@@ -7,43 +7,50 @@
     <% include partials/default/header.ejs %>
     <div class="wrapper">
       
-      <div class="content small-11 small-centered medium-10 columns">
+      <div class="content small-12 small-centered medium-10 columns">
 
         <h2><%= name %></h2>
     
-        <div class="slick">
+        <div class="slick row small-12 small-centered columns">
           <% for(var i = 0; i<photos.length; i++){%>
              <div>
-                <img src='https://farm<%= photos[i].farm%>.staticflickr.com/<%= photos[i].server%>/<%= photos[i].id%>_<%= photos[i].secret%>_b.jpg' />
+                <img src='https://farm<%= photos[i].farm%>.staticflickr.com/<%= photos[i].server%>/<%= photos[i].id%>_<%= photos[i].secret%>_b.jpg'/>
              </div>
           <% }; %>
         </div>
-
-        <% if(data){ %> 
-          <% include partials/forms/ratingForm.ejs %>
-          <% include partials/forms/addFavorite.ejs %>
-        <% } %>
-        <p>Station Triplet: <%= triplet %></p>
-        <p>Elevation: <%= elevation %> ft</p>
-        <p>Latitude: <%= lat %></p>
-        <p>Longitude: <%= lng %></p>
-
-        <p>Weather : <%= weather %></p>
-
-
-        <img src="" />
-
-        <% conditions.forEach(function(item){ %>
-          <div class="searchResults">
-            <h3>Weather For: <%= item['Date'] %></h3>
-            <p>Snow Water Equivalend in Inches: <%= item['Snow Water Equivalent (in)'] %></p>
-            <p>Snow Depth in Inches: <%= item['Snow Depth (in)'] %></p>
+        <div class="row rate-fav">
+          <% if(data){ %> 
+          <div class="left small-12 large-6 columns">
+            <h3>Add <%= name %> to Favorites</h3>
+            <% include partials/forms/addFavorite.ejs %>
           </div>
-        <% }); %>
-
+          <div class="right small-12 large-6 columns">
+            <h3>Rate <%= name %></h3>
+            <% include partials/forms/ratingForm.ejs %>
+          </div>
+          <% } %>
+        </div>
+        <div class="row details-weather">
+          <div class="roundbox details small-12 large-5 columns">
+            <h3>Details For: <%= name %></h3>
+            <h4>Station Triplet:</h4> <p><%= triplet %></p>
+            <h4>Elevation:</h4> <p><%= elevation %> ft</p>
+            <h4>Latitude:</h4> <p><%= lat %></p>
+            <h4>Longitude:</h4> <p><%= lng %></p>
+          </div>
+          <div class="small-12 large-6 large-offset-1 columns">
+              <% conditions.forEach(function(item){ %>
+                <div class="roundbox weather">
+                  <h3>Weather For: <%= item['Date'] %></h3>
+                  <h4>Snow Water Equivalend in Inches:</h4> 
+                    <p><%= item['Snow Water Equivalent (in)'] %></p>
+                  <h4>Snow Depth in Inches:</h4>
+                    <p><%= item['Snow Depth (in)'] %></p>
+                </div>
+              <% }); %>
+          </div>
+        </div>
       </div>
-      <% include partials/forms/signUp.ejs %>
-
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>
     </div>

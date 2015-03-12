@@ -1,8 +1,22 @@
 <form action="/rate" method="post">
-	<input type="radio" name="rating" value="1" />1
-	<input type="radio" name="rating" value="2" />2
-	<input type="radio" name="rating" value="3" />3
-	<input type="radio" name="rating" value="4" />4
-	<input type="radio" name="rating" value="5" />5
-	<button type="submit">Rate</button>
+	<div class="radios row small-12 small-centered columns">
+		<label for="1" class="small-2 columns">1
+			<input type="radio" name="rating" id="1" value="1" />
+		</label>
+		<label for="2" class="small-3 columns">2
+			<input type="radio" name="rating" id="2" value="2" />
+		</label>
+		<label for="3" class="small-2 columns">3
+			<input type="radio" name="rating" id="3" value="3" />
+		</label>
+		<label for="4" class="small-3 columns">4
+			<input type="radio" name="rating" id="4" value="4" />
+		</label>	
+		<label for="5" class="small-2 columns">5
+			<input type="radio" name="rating" id="5" value="5" />
+		</label>
+	</div>
+	<div class="row">
+		<button type="submit" class="small-10 small-centered columns">Rate</button>
+	</div>
 </form>

@@ -5,10 +5,31 @@
 </head>
   <body class="<%=page %>">
     <% include partials/default/header.ejs %>
-    <div>
-      <div class="jumbotron small-12 small-centered columns"></div>
-      <% include userinfo.ejs %>
+    <div class="wrapper">
+      <h1>Welcome, <%= data.username %></h1>
+      <div class="small-12 medium-6 columns">
+        <h2>Your Favorites</h2>
+        <% favs.forEach(function(item){ %>
+        <a href="/mountain/<%= item.triplet %>">
+          <div class="favorites">
+            <p>Name: <%= item.name %></p>
+            <p>Station Triplet: <%= item.triplet %></p>
+            <p>Elevation: <%= item.elevation %> ft</p>
+          </div>
+        </a>
+        <% }); %>
+      </div>
 
+      <div class="small-12 medium-6 columns">
+        <h2>Your Ratings</h2>
+        <a href="/mountain/">
+          <div class="ratings">
+            <p>Name: </p>
+            <p>Station Triplet: </p>
+            <p>Elevation: </p>
+          </div>
+        </a>
+      </div>
       <% include partials/default/footer.ejs %>
       <% include partials/default/jsdefaults.ejs %>
     </div>

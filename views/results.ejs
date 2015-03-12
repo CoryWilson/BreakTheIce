@@ -9,10 +9,12 @@
     	<h1>Your Results: </h1>
       <% stations.forEach(function(item){ %>
         	<a href="/mountain/<%= item.triplet %>">
-	        	<div class="searchResults row large-11 large-centered columns">
-	        		<h4><%= item.name %></h4>
-              <p><%= item.triplet %></p>
-	        		<p><%= item.elevation %> ft</p>
+	        	<div class="searchResults row large-8 large-centered columns">
+	        		<div class="large-4 large-centered columns">
+                <h3>Mountain: <%= item.name %></h3>
+                <p>Triplet Id:<%= item.triplet %></p>
+  	        		<p>Elevation: <%= item.elevation %> ft</p>
+              </div>
 	        	</div>
         	</a>
       <% }); %>

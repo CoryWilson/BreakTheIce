@@ -8,16 +8,12 @@
   <body class="<%= page %>">
     <% include partials/default/header.ejs %>
     <div class="wrapper">
-      <div class="jumbotron small-12 small-centered columns">
-        <div class="content large-8 large-centered columns">
-          <div class="left">
-            <h1>Break The Ice</h1>
-            <p>Mountain Reports. Quick.</p>
-          </div>
-          <div class="right">
-            <% include search.ejs %>
-          </div>
+      <div class="jumbotron">
+        <div class="cta small-11 small-centered large-10 large-centered columns">
+          <h1>Break The Ice</h1>
+          <p>Mountain Reports. Quick.</p>
         </div>
+        <% include partials/forms/search.ejs %>
       </div>
       
       <% if(data){ %>
@@ -25,7 +21,7 @@
       <% }  else { %>
         <% include partials/forms/signUpForm.ejs %>
       <% }; %>
-      <div class="row">
+      <!-- <div class="row">
         <h1>Your Location</h1><br>
         <iframe id="map-samp"
                 width="600"
@@ -34,7 +30,7 @@
                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBH9NFylRWp5jZzmGE1ELB57F9OcDAy4NM
     &q=location=<%=lat%>,<%=lng%>">
         </iframe>
-      </div>
+      </div> -->
     </div>
 
       <% include partials/default/footer.ejs %>

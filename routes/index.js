@@ -91,7 +91,7 @@ router.post('/checkUser',function(req,res){
         var statement = 'select * from users where username = ? and password = ?';
         var query = connection.query(statement,[user,pass], function(err,rows,fields){
             if(err) throw err;
-            console.log(rows);
+            //console.log(rows);
             console.log('Id: '+rows[0].id);
             console.log('username: '+rows[0].username);
 
@@ -100,9 +100,9 @@ router.post('/checkUser',function(req,res){
             sess.username = rows[0].username;
             //sess.password = rows[0].password;
 
-            // console.log('Session Id: '+sess.id);
-            // console.log('Session Email: '+sess.email);
-            // console.log('Session Username: '+sess.username);
+            console.log('Session Id: '+sess.id);
+            console.log('Session Email: '+sess.email);
+            console.log('Session Username: '+sess.username);
             //console.log('Session Password: '+sess.password);
             // res.render('user',
             //   {   
@@ -138,16 +138,30 @@ router.get('/profile',function(req,res){
 
             console.log(favs);
 
-            sql.ratings(username,function(ratings){
-                var rName = [];
-                var rTriplet = [];
-                var rElevation = [];
+            // sql.ratings(username,function(ratings){
+            //     var rName = [];
+            //     var rTriplet = [];
+            //     var rElevation = [];
 
-                ratings.forEach(function(x){
-                    rName = rTriplet.concat(x.name);
-                    rTriplet = rTriplet.concat(x.triplet);
-                    rElevation = rElevation.concat(x.elevation);
-                });
+            //     ratings.forEach(function(x){
+            //         rName = rTriplet.concat(x.name);
+            //         rTriplet = rTriplet.concat(x.triplet);
+            //         rElevation = rElevation.concat(x.elevation);
+            //     });
+
+            // <% console.log(ratings)%>
+
+    
+
+            // <% ratings.forEach(function(i){ %>
+            // <a href="/mountain/<%= i.rTriplet %>">
+            //     <div class="searchResults favorites">
+            //         <p>Name: <%= i.rName %></p>
+            //         <p>Station Triplet: <%= i.rTriplet %></p>
+            //         <p>Elevation: <%= i.rElevation %> ft</p>
+            //     </div>
+            // </a>
+            // <% }); %>
 
                 res.render('user',
                 {   
@@ -159,13 +173,13 @@ router.get('/profile',function(req,res){
                     name: name,
                     triplet: triplet,
                     elevation: elevation,
-                    ratings: ratings,
-                    rName: rName,
-                    rTriplet: rTriplet,
-                    rElevation: rElevation,
+                    //ratings: ratings,
+                    // rName: rName,
+                    // rTriplet: rTriplet,
+                    // rElevation: rElevation,
                     data: sess
                 });//end render
-            });
+            // });
         });
     }//end if
        else {
@@ -234,14 +248,46 @@ router.get('/searchResults',function(req,res){
 //flickr call with name of station
 router.get('/mountain/:triplet',function(req,res){
     var triplet = req.params.triplet;
+
+    router.post('/addFavorite',function(req,res){
+        username = sess.username;
+        console.log(triplet+' '+username);
+
+        var post = {triplet:triplet,username:username};
+        var statement = 'insert into favorites set?';
+        var query = connection.query(statement,post,function(err,callback){});
+        
+        triplet = null;
+
+        console.log(query.sql);
+        res.redirect('/searchResults');
+    });// end add favorite
+
+    router.post('/rate',function(req,res){
+        username = sess.username;
+        rating = req.body.rating;
+        console.log(triplet+' '+username+' '+rating);
+
+        var post = {triplet:triplet,username:username,rating:rating};
+        var statement = 'insert into ratings set?';
+        var query = connection.query(statement,post,function(err,callback){});
+        
+        triplet = null;
+
+        console.log(query.sql);
+        res.redirect('/searchResults');
+    });// end rate
+
     api.powderLinesStation(triplet,function(results){
         var station = [];
         var conditions = [];
         var name = [];
         lat = [];
         lng = [];
-        var triplet = [];
+        //triplet = [];
+        var rTriplet = [];
         var elevation = [];
+        var rElevation = [];
         var farmId;
         var server;
         var photoSecret;
@@ -257,7 +303,7 @@ router.get('/mountain/:triplet',function(req,res){
             if(item.triplet == req.params.triplet){
                 station.push(item);
                 name = name.concat(item.name);
-                triplet = triplet.concat(item.triplet);
+                //triplet = triplet.concat(item.triplet);
                 elevation = elevation.concat(item.elevation);
                 lat = lat.concat(item.location.lat);
                 lng = lng.concat(item.location.lng);
@@ -277,10 +323,10 @@ router.get('/mountain/:triplet',function(req,res){
             var city = weather.location.city;
             var state = weather.location.state;
             var location = city;
-            console.log(location);
+            //console.log(location);
 
             api.flickrCall(lat,lng,function(photos){
-            console.log(photos);    
+            //console.log(photos);    
 
                 res.render('mountain',
                 {   title: 'Mountain Info',
@@ -310,34 +356,7 @@ router.get('/mountain/:triplet',function(req,res){
             
         });// end weather api call
 
-        router.post('/rate',function(req,res){
-
-            triplet = triplet;
-            username = sess.username;
-            rating = req.body.rating;
-            console.log(triplet+' '+username+' '+rating);
-
-            var post = {triplet:triplet,username:username,rating:rating};
-            var statement = 'insert into ratings set?';
-            var query = connection.query(statement,post,function(err,result){});
-            
-            console.log(query.sql);
-            res.redirect('/profile');
-        });// end rate
-
-        router.post('/addFavorite',function(req,res){
-
-            triplet = triplet;
-            username = sess.username;
-            console.log(triplet+' '+username);
-
-            var post = {triplet:triplet,username:username};
-            var statement = 'insert into favorites set?';
-            var query = connection.query(statement,post,function(err,result){});
-            
-            console.log(query.sql);
-            res.redirect('/');
-        });// end add favorite
+        
         
     });///end powderlines station api call
 

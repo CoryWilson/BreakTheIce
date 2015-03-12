@@ -34,12 +34,12 @@ exports.ratings = function(username,callback){
     });
 };
 
-exports.checkUser = function(username,password,callback){
-    var statement = 'select * from users where username = ? and password = ?';
-    var query = connection.query(statement,[user,pass], function(err,rows,fields){
-        if(err) throw err;
-        send.id = rows[0].id;
-        sess.email = rows[0].email;
-        sess.username = rows[0].email;
-    });
-};
+// exports.checkUser = function(username,password,callback){
+//     var statement = 'select * from users where username = ? and password = ?';
+//     var query = connection.query(statement,[user,pass], function(err,rows,fields){
+//         if(err) throw err;
+//         send.id = rows[0].id;
+//         sess.email = rows[0].email;
+//         sess.username = rows[0].email;
+//     });
+// };
