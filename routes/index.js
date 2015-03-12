@@ -14,7 +14,8 @@ var mysql = require('mysql');
 var geolocation = require('geolocation');
 var jquery = require('jquery');
 
-var api = require('../api.js');
+var api = require('../modules/api.js');
+var sql = require('../modules/sql.js');
 
 //global session variable
 var sess;
@@ -22,6 +23,7 @@ var lat;
 var lng;
 
 //mysql connection
+
 var connection = mysql.createConnection({
     user     : 'root',
     password : 'root',
@@ -29,6 +31,7 @@ var connection = mysql.createConnection({
     port: '8889',
     database : 'asl_node'
 });
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -88,28 +91,28 @@ router.post('/checkUser',function(req,res){
         var statement = 'select * from users where username = ? and password = ?';
         var query = connection.query(statement,[user,pass], function(err,rows,fields){
             if(err) throw err;
-                  console.log(rows);
-                  console.log('Id: '+rows[0].id);
-                  console.log('username: '+rows[0].username);
-                  
-                  sess.id = rows[0].id;
-                  sess.email = rows[0].email;
-                  sess.username = rows[0].username;
-                  //sess.password = rows[0].password;
+            console.log(rows);
+            console.log('Id: '+rows[0].id);
+            console.log('username: '+rows[0].username);
 
-                  // console.log('Session Id: '+sess.id);
-                  // console.log('Session Email: '+sess.email);
-                  // console.log('Session Username: '+sess.username);
-                  //console.log('Session Password: '+sess.password);
-                  // res.render('user',
-                  //   {   
-                  //       title: 'User Profile',
-                  //       classname: 'user',
-                  //       page: 'user',
-                  //       header: 'header',
-                  //       data: sess
-                  //   });  
-                res.redirect('/');
+            sess.id = rows[0].id;
+            sess.email = rows[0].email;
+            sess.username = rows[0].username;
+            //sess.password = rows[0].password;
+
+            // console.log('Session Id: '+sess.id);
+            // console.log('Session Email: '+sess.email);
+            // console.log('Session Username: '+sess.username);
+            //console.log('Session Password: '+sess.password);
+            // res.render('user',
+            //   {   
+            //       title: 'User Profile',
+            //       classname: 'user',
+            //       page: 'user',
+            //       header: 'header',
+            //       data: sess
+            //   });  
+            res.redirect('/');
         });
 
     
@@ -121,46 +124,49 @@ router.post('/checkUser',function(req,res){
 //check user profile session
 router.get('/profile',function(req,res){
     if(sess){
-        //for favorites
-        //select from favorites where username = ?username
-        //join mountain table pull name
         var username = sess.username;
-        var statement = 'select * from favorites join mountains on mountains.triplet = favorites.triplet where username = ?';
-        var query = connection.query(statement,username, function(err,rows,fields){
+        sql.favorites(username,function(favs){
+            var name = [];
+            var triplet = [];
+            var elevation = [];
 
-        //console.log(query.sql);    
-        //console.log(rows[0]);
+            favs.forEach(function(item){
+                name = name.concat(item.name);
+                triplet = triplet.concat(item.triplet);
+                elevation = elevation.concat(item.elevation);
+            });//end favs foreach
 
-        var favs = [];
-        var name = [];
-        var triplet = [];
-        var elevation = [];
+            console.log(favs);
 
-        for(var i=0;i<rows.length;i++){
-            favs.push(rows[i]);
-        }
-        favs.forEach(function(item){
-            name = name.concat(item.name);
-            triplet = triplet.concat(item.triplet);
-            elevation = elevation.concat(item.elevation);
-        });//end favs foreach
+            sql.ratings(username,function(ratings){
+                var rName = [];
+                var rTriplet = [];
+                var rElevation = [];
 
-        console.log(favs);
+                ratings.forEach(function(x){
+                    rName = rTriplet.concat(x.name);
+                    rTriplet = rTriplet.concat(x.triplet);
+                    rElevation = rElevation.concat(x.elevation);
+                });
 
-        res.render('user',
-            {   
-                title: 'User Profile',
-                classname: 'user',
-                page: 'user',
-                header: 'header',
-                favs: favs,
-                name: name,
-                triplet: triplet,
-                elevation: elevation,
-                data: sess
-            });//end render
-
-        });//end query function
+                res.render('user',
+                {   
+                    title: 'User Profile',
+                    classname: 'user',
+                    page: 'user',
+                    header: 'header',
+                    favs: favs,
+                    name: name,
+                    triplet: triplet,
+                    elevation: elevation,
+                    ratings: ratings,
+                    rName: rName,
+                    rTriplet: rTriplet,
+                    rElevation: rElevation,
+                    data: sess
+                });//end render
+            });
+        });
     }//end if
        else {
         res.redirect('/');
@@ -263,26 +269,18 @@ router.get('/mountain/:triplet',function(req,res){
             }
         });//end conditions foreach
 
-        api.flickrCall(lat,lng,function(photos){
-            console.log(photos);
+        
 
-            farmId = photos.farmId;
-            serverId = photos.serverId;
-            photoSecret = photos.photoSecret;
-            photoId = photos.photoId;
+        api.weatherCall(lat,lng,function(weather){
+            //console.log(weatherObj);
+            //console.log(weather);
+            var city = weather.location.city;
+            var state = weather.location.state;
+            var location = city;
+            console.log(location);
 
-            /*
-                <div class="slick">
-                  <% for(var i = 0; i<flickrObj.length; i++){ %>
-                     <div>
-                        <img src="https://farm<%=farmId[i]%>.staticflickr.com/<%=flickrObj.serverId[i]%>/<%=flickrObj.photoId[i]%>_<%=flickrObj.photoSecret[i]%>_m.jpg" />
-                     </div>
-                  <% } %>
-                </div>
-            */
-            api.weatherCall(lat,lng,function(weather){
-                //console.log(weatherObj);
-                //console.log(weather);
+            api.flickrCall(lat,lng,function(photos){
+            console.log(photos);    
 
                 res.render('mountain',
                 {   title: 'Mountain Info',
@@ -291,14 +289,14 @@ router.get('/mountain/:triplet',function(req,res){
                     results: results,
                     station: station,
                     photos: photos,
-                    farmId: farmId,
-                    serverId: serverId,
-                    photoSecret: photoSecret,
-                    photoId: photoId,
+                    // farmId: farmId,
+                    // serverId: serverId,
+                    // photoSecret: photoSecret,
+                    // photoId: photoId,
                     conditions: conditions,
                     name: name,
                     weather: weather,
-                    //city: city,
+                    city: city,
                     //farmId: farmId,
                     lat: lat,
                     lng: lng,
@@ -308,9 +306,9 @@ router.get('/mountain/:triplet',function(req,res){
                     data: sess
                 });//end res render
 
-            });//end weather api call
+            });//end flickr api call
             
-        });// end flickr api call
+        });// end weather api call
 
         router.post('/rate',function(req,res){
 

@@ -1,5 +1,5 @@
-var app = require('./app.js');
-var index = require('./routes/index.js');
+var app = require('../app.js');
+var index = require('../routes/index.js');
 var request = require('request');
 
 exports.powderLinesClosest = function(lat,lng,callback){
@@ -25,8 +25,10 @@ exports.powderLinesStation = function(triplet,callback){
 exports.flickrCall = function(lat,lng,callback){
     var flickrKey = '6a499e7169f57f2dc2c7d74a917dac96';
     var flickrSecret = 'f446b4bb915d18b2';
-    var flickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+flickrKey+'&safe_search=1&place_id=&has_geo=&geo_context=2&lat='+lat+'&lon='+lng+'&per_page=5&page=&format=json&nojsoncallback=1';
-    
+    //var flickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+flickrKey+'&safe_search=1&place_id=&has_geo=&geo_context=2&lat='+lat+'&lon='+lng+'&per_page=5&page=&format=json&nojsoncallback=1';
+    var flickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+flickrKey+'&lat='+lat+'&lon='+lng+'&format=json&nojsoncallback=1';
+    console.log(flickrAPI);
+
     request(flickrAPI, function(error,response,body){
         if(!error && response.statusCode == 200){   
             var flickr = JSON.parse(body);

@@ -10,14 +10,13 @@
       <div class="content small-11 small-centered medium-10 columns">
 
         <h2><%= name %></h2>
-        
-
+    
         <div class="slick">
-          <% photos.forEach(function(i){ %>
+          <% for(var i = 0; i<photos.length; i++){%>
              <div>
-                <img src='https://farm<%= farmId%>.staticflickr.com/<%= serverId%>/<%= photoId%>_<%= photoSecret%>_m.jpg' />
+                <img src='https://farm<%= photos[i].farm%>.staticflickr.com/<%= photos[i].server%>/<%= photos[i].id%>_<%= photos[i].secret%>_b.jpg' />
              </div>
-          <% }); %>
+          <% }; %>
         </div>
 
         <% if(data){ %> 

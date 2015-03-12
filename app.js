@@ -13,7 +13,8 @@ var mysql = require('mysql');
 //routes
 var routes = require('./routes/index');
 
-var api = require('./api.js');
+var api = require('./modules/api.js');
+var sql = require('./modules/sql.js');
 
 var app = express();
 
