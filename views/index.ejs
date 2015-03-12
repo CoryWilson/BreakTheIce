@@ -25,12 +25,16 @@
       <% }  else { %>
         <% include partials/forms/signUpForm.ejs %>
       <% }; %>
-      <p>Click the button to get your coordinates.</p>
-        <form action="coordinates" >
-          <button>Try It</button>
-        </form>
-      <p id="demo"></p>
-
+      <div class="row">
+        <h1>Your Location</h1><br>
+        <iframe id="map-samp"
+                width="600"
+                height="450"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBH9NFylRWp5jZzmGE1ELB57F9OcDAy4NM
+    &q=location=<%=lat%>,<%=lng%>">
+        </iframe>
+      </div>
     </div>
 
       <% include partials/default/footer.ejs %>

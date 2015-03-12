@@ -11,10 +11,26 @@
 
         <h2><%= name %></h2>
         
+
+        <div class="slick">
+          <% photos.forEach(function(i){ %>
+             <div>
+                <img src='https://farm<%= farmId%>.staticflickr.com/<%= serverId%>/<%= photoId%>_<%= photoSecret%>_m.jpg' />
+             </div>
+          <% }); %>
+        </div>
+
+        <% if(data){ %> 
+          <% include partials/forms/ratingForm.ejs %>
+          <% include partials/forms/addFavorite.ejs %>
+        <% } %>
         <p>Station Triplet: <%= triplet %></p>
         <p>Elevation: <%= elevation %> ft</p>
         <p>Latitude: <%= lat %></p>
         <p>Longitude: <%= lng %></p>
+
+        <p>Weather : <%= weather %></p>
+
 
         <img src="" />
 

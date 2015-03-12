@@ -87,8 +87,9 @@ input.roundify {
 
 .jumbotron button {
 	background: #fffbff;
+	width: 225px;
 	padding: 30px;
-	margin: 50px auto;
+	margin: 10px auto;
 }
 
 .jumbotron button:hover {

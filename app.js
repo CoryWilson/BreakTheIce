@@ -13,6 +13,8 @@ var mysql = require('mysql');
 //routes
 var routes = require('./routes/index');
 
+var api = require('./api.js');
+
 var app = express();
 
 // view engine setup

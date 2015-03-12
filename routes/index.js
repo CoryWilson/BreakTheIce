@@ -12,18 +12,9 @@ var url = require('url');
 var mysql = require('mysql');
 //var liftie = require('liftie');
 var geolocation = require('geolocation');
-var Flickr = require("flickrapi");
-
 var jquery = require('jquery');
-//flickrOptions = {
-//    api_key: "2bc3ab2e5a635e060d20407bbea8c084",
-//    secret: "41a710fd1e55ba6b"
-//};
-//
-//Flickr.authenticate(flickrOptions, function(error, flickr) {
-//
-//});
 
+var api = require('../api.js');
 
 //global session variable
 var sess;
@@ -46,6 +37,8 @@ router.get('/', function(req, res, next) {
         classname: 'home',
         header: 'header',
         page: 'home',
+        lat: lat,
+        lng: lng,
         data: sess
         });
 
@@ -108,14 +101,15 @@ router.post('/checkUser',function(req,res){
                   // console.log('Session Email: '+sess.email);
                   // console.log('Session Username: '+sess.username);
                   //console.log('Session Password: '+sess.password);
-                  res.render('user',
-                    {   
-                        title: 'User Profile',
-                        classname: 'user',
-                        page: 'user',
-                        header: 'header',
-                        data: sess
-                    });
+                  // res.render('user',
+                  //   {   
+                  //       title: 'User Profile',
+                  //       classname: 'user',
+                  //       page: 'user',
+                  //       header: 'header',
+                  //       data: sess
+                  //   });  
+                res.redirect('/');
         });
 
     
@@ -127,17 +121,50 @@ router.post('/checkUser',function(req,res){
 //check user profile session
 router.get('/profile',function(req,res){
     if(sess){
-      res.render('user',
+        //for favorites
+        //select from favorites where username = ?username
+        //join mountain table pull name
+        var username = sess.username;
+        var statement = 'select * from favorites join mountains on mountains.triplet = favorites.triplet where username = ?';
+        var query = connection.query(statement,username, function(err,rows,fields){
+
+        //console.log(query.sql);    
+        //console.log(rows[0]);
+
+        var favs = [];
+        var name = [];
+        var triplet = [];
+        var elevation = [];
+
+        for(var i=0;i<rows.length;i++){
+            favs.push(rows[i]);
+        }
+        favs.forEach(function(item){
+            name = name.concat(item.name);
+            triplet = triplet.concat(item.triplet);
+            elevation = elevation.concat(item.elevation);
+        });//end favs foreach
+
+        console.log(favs);
+
+        res.render('user',
             {   
                 title: 'User Profile',
                 classname: 'user',
                 page: 'user',
                 header: 'header',
+                favs: favs,
+                name: name,
+                triplet: triplet,
+                elevation: elevation,
                 data: sess
-            });
-    } else {
+            });//end render
+
+        });//end query function
+    }//end if
+       else {
         res.redirect('/');
-    }
+    }//end else
   
 });
 
@@ -149,199 +176,174 @@ router.get('/logout',function(req,res){
 
 });
 
-
-// router.get('/locationSearch',function(req,res){
-
-//     geocoder.geocode('29 champs elysée paris', function(err, res){
-//         console.log(res);
-
-//     });
-// });
-
-
-// router.get('/locate',function(req,res){
-
-//   navigator.geolocation.getCurrentPosition(function (err, position) {
-//         if (err) throw err
-//         console.log(position)
-
-//       })
-// });
-
-//var geocoderProvider = 'google';
-//var extra = {
-//     apiKey: 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM',
-//     formatter: null
-//};
-//var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, extra);
-//
-//geocoder.geocode('29 champs elysée paris', function(err, res) {
-//     console.log(res);
-// });
-// router.post('/url',function(req,res){
-//     var googleApi = 'AIzaSyCeCU2QmSLPuQyTckS0K-bzbHtC8sIcziM';
-//     var geo = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyA9RhkovjIJCLh0mo6EaXIuWzx8LhF0Hlk';
-    
-//     request(geo, function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             var results = JSON.parse(body);
-//                 res.render('searchResults',
-//                 {   title: 'Nearest Mountains',
-//                     page: 'Results',
-//                     results: results
-//                 });
-//             console.log(results);
-//         }
-
-//     });
-// });
-//});
-
-//works grabs coordinates from browser through ajax call
-
-// router.post('/searchResults',function(req,res){
-    // var obj = req.body; 
-    // var lat = obj.lat;
-    // var long = obj.long;
-    // console.log(lat+', '+long);
-
-//     najax('/coordinates',
-//     { type:'POST' }, 
-//     function(html){ 
-//         console.log(html); 
-//     })
-
-// var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+long+'&data=true&days=10&count=10';
-//     request(powderLinesAPI, function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             var results = JSON.parse(body);
-//                 res.render('searchResults',
-//                 {   title: 'Nearest Mountains',
-//                     page: 'Results',
-//                     results: results
-//                 });
-//         }
-
-//     });
-// });
-
+//gets the coordinates from the browser
 var coordinates = router.post('/coordinates',function(req,res){
     var obj = req.body;
+    console.log(obj);
     lat = obj.lat;
     lng = obj.lng;
     res.redirect('/searchResults');
 });
 
+
+
 //swap out lat and long from geolocation to get complete functionality
 router.get('/searchResults',function(req,res){
-    var powderLinesAPI = 'http://api.powderlin.es/closest_stations?lat='+lat+'&lng='+lng+'&data=true&days=0&count=5';
-    request(powderLinesAPI, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var results = JSON.parse(body);
-            var stations = [];
-            var name = [];
-            var triplet = [];
-            var elevation = [];
+        
+    api.powderLinesClosest(lat,lng,function(results){
+        var stations = [];
+        var name = [];
+        var triplet = [];
+        var elevation = [];
 
-            for(var i=0;i<results.length;i++){
-                stations.push(results[i].station_information);   
-            }//end for
-            stations.forEach(function(item){
-                name = name.concat(item.name);
-                triplet = triplet.concat(item.triplet);
-                elevation = elevation.concat(item.elevation);
-            });//end stations foreach
+        for(var i=0;i<results.length;i++){
+            stations.push(results[i].station_information);   
+        }//end for
 
-            res.render('results',
-            {   title: 'Nearest Mountains',
-                page: 'results',
-                header: 'header',
-                results: results,
-                stations: stations,
-                name : name,
-                triplet: triplet,
-                elevation : elevation,
-                data: sess
-            });//end res.render
-        }//end if
-    });//end request
+        stations.forEach(function(item){
+            name = name.concat(item.name);
+            triplet = triplet.concat(item.triplet);
+            elevation = elevation.concat(item.elevation);
+        });
+
+        res.render('results',
+        {   title: 'Nearest Mountains',
+            page: 'results',
+            header: 'header',
+            results: results,
+            stations: stations,
+            name : name,
+            triplet: triplet,
+            elevation : elevation,
+            data: sess
+        });//end res.render
+
+    });//end powderLinesAPI
+
 });//end router.get
 
 //individual page
 
 //weather call with lat and long from station info
 //flickr call with name of station
-
 router.get('/mountain/:triplet',function(req,res){
-    var plAPI = 'http://api.powderlin.es/station/'+req.params.triplet;
-    console.log(plAPI);
+    var triplet = req.params.triplet;
+    api.powderLinesStation(triplet,function(results){
+        var station = [];
+        var conditions = [];
+        var name = [];
+        lat = [];
+        lng = [];
+        var triplet = [];
+        var elevation = [];
+        var farmId;
+        var server;
+        var photoSecret;
+        var photoId;
 
-    request(plAPI, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var results = JSON.parse(body);
-            var station = [];
-            var conditions = [];
-            var name = [];
-            var lat = [];
-            var lng = [];
-            var triplet = [];
-            var elevation = [];
+        station.push(results.station_information); 
+        
+        for(var i=0;i<results.data.length;i++){
+            conditions.push(results.data[i])
+        }
 
-            station.push(results.station_information); 
-            
-            for(var i=0;i<results.data.length;i++){
-                conditions.push(results.data[i])
+        station.forEach(function(item){
+            if(item.triplet == req.params.triplet){
+                station.push(item);
+                name = name.concat(item.name);
+                triplet = triplet.concat(item.triplet);
+                elevation = elevation.concat(item.elevation);
+                lat = lat.concat(item.location.lat);
+                lng = lng.concat(item.location.lng);
             }
+        });//end station foreach
+        conditions.forEach(function(item){
+            if(item.triplet == req.params.triplet){
+                conditions.push(item);
+            }
+        });//end conditions foreach
 
-            station.forEach(function(item){
-                if(item.triplet == req.params.triplet){
-                    station.push(item);
-                    name = name.concat(item.name);
-                    triplet = triplet.concat(item.triplet);
-                    elevation = elevation.concat(item.elevation);
-                    lat = lat.concat(item.location.lat);
-                    lng = lng.concat(item.location.lng);
-                }
-            });//end station foreach
-            conditions.forEach(function(item){
-                if(item.triplet == req.params.triplet){
-                    conditions.push(item);
-                }
-            });//end conditions foreach
+        api.flickrCall(lat,lng,function(photos){
+            console.log(photos);
 
-            //weather underground api call by lat & long
-            var wAPI = 'http://api.wunderground.com/api/9223f36975c7d646/geolookup/q/'+lat+','+lng+'.json';
-            console.log(wAPI);
+            farmId = photos.farmId;
+            serverId = photos.serverId;
+            photoSecret = photos.photoSecret;
+            photoId = photos.photoId;
 
-            var weatherReq = request(wAPI, function(e,r,b){
-                if(!e && r.statusCode == 200){
-                    var weather = JSON.parse(b);
-                    // var weather = [];
-                    // //console.log(weatherJSON);
-                    // weather.push(weatherJSON.location);
-                    // console.log(weather);
-                    var city = weather.location.city;
-                }
-            });
+            /*
+                <div class="slick">
+                  <% for(var i = 0; i<flickrObj.length; i++){ %>
+                     <div>
+                        <img src="https://farm<%=farmId[i]%>.staticflickr.com/<%=flickrObj.serverId[i]%>/<%=flickrObj.photoId[i]%>_<%=flickrObj.photoSecret[i]%>_m.jpg" />
+                     </div>
+                  <% } %>
+                </div>
+            */
+            api.weatherCall(lat,lng,function(weather){
+                //console.log(weatherObj);
+                //console.log(weather);
 
-            res.render('mountain',
-            {   title: 'Mountain Info',
-                page: 'mountain',
-                header: 'header',
-                results: results,
-                station: station,
-                conditions: conditions,
-                name: name,
-                // weather: weather,
-                // city: city,
-                lat: lat,
-                lng: lng,
-                triplet: triplet,
-                elevation : elevation,
-                data: sess
-            });//end res render
-        }//end if !error
-    });//end request
+                res.render('mountain',
+                {   title: 'Mountain Info',
+                    page: 'mountain',
+                    header: 'header',
+                    results: results,
+                    station: station,
+                    photos: photos,
+                    farmId: farmId,
+                    serverId: serverId,
+                    photoSecret: photoSecret,
+                    photoId: photoId,
+                    conditions: conditions,
+                    name: name,
+                    weather: weather,
+                    //city: city,
+                    //farmId: farmId,
+                    lat: lat,
+                    lng: lng,
+                    triplet: triplet,
+                    elevation : elevation,
+                    //rating: rating,
+                    data: sess
+                });//end res render
+
+            });//end weather api call
+            
+        });// end flickr api call
+
+        router.post('/rate',function(req,res){
+
+            triplet = triplet;
+            username = sess.username;
+            rating = req.body.rating;
+            console.log(triplet+' '+username+' '+rating);
+
+            var post = {triplet:triplet,username:username,rating:rating};
+            var statement = 'insert into ratings set?';
+            var query = connection.query(statement,post,function(err,result){});
+            
+            console.log(query.sql);
+            res.redirect('/profile');
+        });// end rate
+
+        router.post('/addFavorite',function(req,res){
+
+            triplet = triplet;
+            username = sess.username;
+            console.log(triplet+' '+username);
+
+            var post = {triplet:triplet,username:username};
+            var statement = 'insert into favorites set?';
+            var query = connection.query(statement,post,function(err,result){});
+            
+            console.log(query.sql);
+            res.redirect('/');
+        });// end add favorite
+        
+    });///end powderlines station api call
+
 });//end router.get
 
+//sup
 module.exports = router;
